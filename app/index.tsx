@@ -1,15 +1,11 @@
 import { Image, StyleSheet, Text, View, Platform, Dimensions, TextInput, TouchableOpacity  } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { useState } from 'react';
+import { Link } from 'expo-router';
 
 export default function HomeScreen() {
 
   const [text, setText] = useState('');
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleChangeText = (inputText : any) => {
-    setText(inputText); 
-  };
 
   return (
    <>
@@ -22,16 +18,13 @@ export default function HomeScreen() {
         <TextInput
         style={styles.input} 
         value={text} 
-        onChangeText={handleChangeText}
         />
 
         <Text style={styles.label}>Senha</Text>
         <TextInput
         style={styles.input} 
         value={text} 
-        onChangeText={handleChangeText}
         />
-
 
         <button style={styles.btn} >
           <Text style={styles.text} >
@@ -39,7 +32,7 @@ export default function HomeScreen() {
           </Text>
         </button>
 
-        <Text style={styles.text2} >Não tem uma conta?</Text>
+        <Link href={'/register'} style={styles.text2}> Não tem uma conta?</Link>
 
         </View>
 
