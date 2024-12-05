@@ -7,8 +7,6 @@ export default function HomeScreen() {
 
   const [text, setText] = useState('');
 
-
-
   return (
    <>
     <View style={styles.container} >
@@ -72,7 +70,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width * 1.8 ,
-    height: 680,
+    height: height / 2.5,
     marginTop: 20,
   },
   label: {
