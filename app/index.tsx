@@ -27,9 +27,9 @@ export default function HomeScreen() {
         />
 
         <button style={styles.btn} >
-          <Text style={styles.text} >
+          <Link href={'/(tabs)/home'} style={styles.text} >
           Entrar
-          </Text>
+          </Link >
         </button>
 
         <Link href={'/register'} style={styles.text2}> Não tem uma conta?</Link>

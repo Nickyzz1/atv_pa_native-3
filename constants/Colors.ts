@@ -57,7 +57,7 @@ export const Colors = {
   },
   azul: {
     text: '#E9FAFF',
-    background: '#ACEAFA',
+    background: '#0DAAD2',
     tint: tintColorDark,
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
@@ -82,6 +82,22 @@ export const Colors = {
   marrom: {
     text: '#ECEDEE',
     background: '#705C43',
+    tint: tintColorDark,
+    icon: '#9BA1A6',
+    tabIconDefault: '#9BA1A6',
+    tabIconSelected: tintColorDark,
+  },
+  azulEscuro : {
+    text: '#ECEDEE',
+    background: '#006E8A',
+    tint: tintColorDark,
+    icon: '#9BA1A6',
+    tabIconDefault: '#9BA1A6',
+    tabIconSelected: tintColorDark,
+  },
+  azulPastel : {
+    text: '#ECEDEE',
+    background: '#E9FAFF',
     tint: tintColorDark,
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
