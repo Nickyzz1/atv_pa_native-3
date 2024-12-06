@@ -24,8 +24,8 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
   rosaClaro: {
-    text: '#ECEDEE',
-    background: '#FFA3C5',
+    text: '#FFEBFF',
+    background: '#FFEBFF',
     tint: tintColorDark,
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
@@ -56,7 +56,7 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
   azul: {
-    text: '#ECEDEE',
+    text: '#E9FAFF',
     background: '#ACEAFA',
     tint: tintColorDark,
     icon: '#9BA1A6',

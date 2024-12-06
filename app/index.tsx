@@ -16,7 +16,7 @@ export default function HomeScreen() {
         <View style={styles.form} >
         <Text style={styles.label}>Email</Text>
         <TextInput
-        style={styles.input} 
+        style={styles.input2} 
         value={text} 
         />
 
@@ -34,7 +34,7 @@ export default function HomeScreen() {
 
         <Link href={'/register'} style={styles.text2}> Não tem uma conta?</Link>
 
-        </View>
+      </View>
 
       <Image
             source={require('../assets/images/image.png')}  
@@ -58,13 +58,16 @@ const styles = StyleSheet.create({
   box: {
     display:'flex',
     height: height,
+    width: width,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     width: width * 1.8 ,
-    height: 680,
+    height: height / 0.95 ,
     marginTop: 20,
+    maxWidth: width,
+    maxHeight: height - 100
   },
   label: {
     fontFamily: 'jua' ,
@@ -76,7 +79,31 @@ const styles = StyleSheet.create({
     height: 40,
     // borderColor: '#ddd',
     borderWidth: 1,
-    width: 250,
+    width: '40%',
+    maxWidth: 500,
+    marginBottom: 20,
+    padding: 5,
+    paddingLeft: 10,
+    borderRadius: 5,
+    outlineColor: Colors.rosaClaro.background,
+    backgroundColor: Colors.rosaRoxo.background,
+    alignSelf: 'center',
+
+    borderColor: Colors.marrom.background,
+    borderTopWidth: 2,
+    borderEndWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0
+  
+  },
+  input2: {
+    padding: 5,
+    height: 40,
+    maxWidth: 600,
+    // borderColor: '#ddd',
+    borderWidth: 1,
+    width: '60%',
     marginBottom: 20,
     paddingLeft: 10,
     borderRadius: 5,
@@ -97,7 +124,11 @@ const styles = StyleSheet.create({
   },
   form : {
     position:'absolute',
-    zIndex: 10
+    zIndex: 10,
+    // backgroundColor: Colors.azul.background,
+    width: width - 10,
+    height: height / 3.4,
+    alignItems: 'center',
   },
   btn: {
     display: 'flex',
@@ -115,7 +146,7 @@ const styles = StyleSheet.create({
   },
   buttonHovered : {
     shadowColor: Colors.rosaClaro.background,  
-    shadowOffset: { width: 2, height: 2 },  
+    shadowOffset: { width: 200, height: 200 },  
     shadowOpacity: 0.3,  
     shadowRadius: 4,     
     elevation: 3, 

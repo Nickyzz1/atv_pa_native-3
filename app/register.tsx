@@ -70,8 +70,10 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width * 1.8 ,
-    height: height / 2.5,
+    height: height / 0.95 ,
     marginTop: 20,
+    maxWidth: width,
+    maxHeight: height - 30
   },
   label: {
     fontFamily: 'jua' ,
@@ -81,9 +83,11 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
+    padding: 4,
     // borderColor: '#ddd',
     borderWidth: 1,
-    width: 250,
+    width: '60%',
+    maxWidth: 500,
     marginBottom: 20,
     paddingLeft: 10,
     borderRadius: 5,
@@ -105,7 +109,9 @@ const styles = StyleSheet.create({
   form : {
     position:'absolute',
     zIndex: 10,
-    marginTop: 35
+    width: width - 10,
+    // height: height / 2.1,
+    alignItems: 'center',
   },
   btn: {
     display: 'flex',
