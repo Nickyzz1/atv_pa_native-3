@@ -1,5 +1,5 @@
 import React from "react"
-import {StyleSheet, Image, View, Text, Button, TextInput, ImageSourcePropType} from 'react-native'
+import {StyleSheet, Image, View, Text, Button, TextInput, ImageSourcePropType, TouchableOpacity} from 'react-native'
 import { Colors } from "@/constants/Colors"
 
 export default function Card({title, price, image, quantidade} : {title: string, price : string, image: string, quantidade?:number }) {

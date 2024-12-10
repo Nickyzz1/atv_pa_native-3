@@ -1,18 +1,18 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "nome": "Bolo de Chocolate",
     "preco": "25.50",
     "imagem": "@/asstes/images/luaDeMel.jpg"
   },
   {
-    "id": "1",
+    "id": 2,
     "nome": "Sonho",
     "preco": "25.50",
     "imagem": "@/asstes/images/sonho.jpg"
   },
   {
-    "id": "1",
+    "id": 3,
     "nome": "Donuts",
     "preco": "25.50",
     "imagem": "@/asstes/images/donuts.jpg"

@@ -32,16 +32,12 @@ export default function HomeScreen() {
 
       const jsonResponse = await response.json();
       console.log('Resposta da requisição: ', jsonResponse);
-      // Fazer um if aqui pra ver se a requisição foi bem sucedida!
       
       if (response.ok) {
         router.push("/");
       }
-
-
     } catch(error) {
       console.error('Erro na requisição:', error);
-      // setResponse('Ocorreu um erro ao enviar os dados.');
     }
   }
 
