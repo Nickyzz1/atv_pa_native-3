@@ -1,20 +1,25 @@
 [
   {
     "id": 1,
-    "nome": "Bolo de Chocolate",
-    "preco": "25.50",
-    "imagem": "@/asstes/images/luaDeMel.jpg"
+    "name": "Bolo de Chocolate",
+    "price": 25.50,
+    "image": "@/asstes/images/luaDeMel.jpg",
+    "amount": 30
   },
+  
   {
     "id": 2,
-    "nome": "Sonho",
-    "preco": "25.50",
-    "imagem": "@/asstes/images/sonho.jpg"
+    "name": "Sonho",
+    "price": 25.50,
+    "image": "@/asstes/images/sonho.jpg",
+    "amount": 30
   },
+
   {
     "id": 3,
-    "nome": "Donuts",
-    "preco": "25.50",
-    "imagem": "@/asstes/images/donuts.jpg"
+    "name": "Donuts",
+    "price": 25.50,
+    "image": "@/asstes/images/donuts.jpg",
+    "amount": 30
   }
 ]

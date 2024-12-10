@@ -4,10 +4,40 @@ import {View, Text, Button, TextInput, StyleSheet, Image, Dimensions, FlatList} 
 import { Colors } from "@/constants/Colors"
 import Card from '@/components/card'
 import dataTests from '@/constants/dataTests.json'
+import { router } from "expo-router"
 
 export default function home() {
-    
 
+    const addInCart = async (id: number, name: string, price: number, amount: number) => {
+        console.log('Id', id);
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/cart', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                id: id,
+                name: name,
+                price: price,
+                amount: amount
+              }),
+            });
+      
+            if (!response.ok) {
+              alert('Erro na requisição!');
+              throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+      
+            const jsonResponse = await response.json();
+            console.log('Resposta da requisição: ', jsonResponse);
+            
+          } catch(error) {
+            console.error('Erro na requisição:', error);
+          }
+    }
+    
        return (
         <>
             <View style={styles.container}>
@@ -21,19 +51,22 @@ export default function home() {
 
                     <View style={styles.box} >
                         <Text style={styles.subTitle}>Destaques</Text>
-                        <FlatList
+                        {/* <FlatList
                             data={dataTests}
                             renderItem={({ item }) => {
                                 return (
                                     <Card id={item.id} title={item.nome} image={item.imagem} price={item.preco} />
                                 );
                             }}
-                        />
+                        /> */}
+                        {dataTests.map((product, index) => (
+                            <Card functionButton={() => addInCart(product.id, product.name, product.price, product.amount)} id={product.id} title={product.name} price={product.price} image={product.image} key={index}/>
+                        ))}
 
                         <Text style={styles.subTitle}>Produtos</Text>
 
                         {dataTests.map((product, index) => (
-                            <Card id={product.id} title={product.nome} price={product.preco} image={product.imagem} key={index}/>
+                            <Card functionButton={() => addInCart(product.id, product.name, product.price, product.amount)} id={product.id} title={product.name} price={product.price} image={product.image} key={index}/>
                         ))}
 
                     </View>
