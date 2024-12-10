@@ -6,44 +6,54 @@ import Card from '@/components/card'
 import dataTests from '@/constants/dataTests.json'
 
 export default function home() {
+    
     const {width, height} = Dimensions.get('window')
 
        return (
         <>
-        <View style={styles.container} >
-            <View style={styles.header} >
+            <View style={styles.container}>
 
-                <Image source={require('@/assets/images/logo.png')} width={20} height={20} alt="" style={[styles.logo]} />
+                <View style={styles.header}>
 
-                <Text style={styles.title} >
-                    Home
-                </Text>
+                    <Image
+                    source={require('@/assets/images/logo.png')}
+                    style={styles.logo} >
+                    </Image>
+                    
+                    <Text style={styles.title} >
+                        Home
+                    </Text>
+
+                </View>
+
+                <Image source={require('@/assets/images/doces-confeitaria.jpg')} style={styles.banner} ></Image>
+
+                <View style={styles.box} >
+
+                    <Text style={styles.subTitle} >
+                        Destaques
+                    </Text>
+
+                    <FlatList
+                        keyExtractor={item => item.id}
+                        data={dataTests}
+                        renderItem={({item}) =>{
+                            return (
+                                <Card title={item.nome} image={item.imagem} price={item.preco}/>
+                        )}}
+                    />
+
+                    <Text style={styles.subTitle} >
+                        Produtos
+                    </Text>
+
+                    {dataTests.map((product, index) => (
+                        <Card title={product.nome} price={product.preco} image={product.imagem} key={index}/>
+                    ))}
+
+                </View>
+
             </View>
-
-            <Image source={require('@/assets/images/doces-confeitaria.jpg')} style={styles.banner} ></Image>
-
-            
-            <Text style={styles.subTitle} >
-                Destaques
-            </Text>
-
-            <FlatList
-                    keyExtractor={item => item.id}
-                    data={dataTests}
-                    renderItem={({item}) =>{
-                        return (
-                            <Card title={item.nome} image={item.imagem} price={item.preco}/>
-                        )
-                    }}
-                />
-
-            <View style={styles.box} >
-                {dataTests.map((product, index) => (
-                    <Card title={product.nome} price={product.preco} image={product.imagem} key={index}/>
-                 ))}
-            </View>
-
-        </View>
         </>
     )
 }
@@ -53,7 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         backgroundColor: Colors.rosaClaro.background,
-        overflow:'hidden'
+        overflow:'scroll'
     },
     title: {
         fontFamily: 'jua',
@@ -67,21 +77,21 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: Colors.font.background,
         marginLeft: 30,
-        marginTop : 10
+        marginTop : 10,
+  
     },
     header : {
         display: 'flex',
+        width: '100%',
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20
     },
     logo : {
         height: 40,
         width: 40,
-        alignSelf: 'flex-start',
-        top: 9,
-        left: 9
+        // alignSelf: 'flex-start',
+        top: 0,
     },
     banner : {
         height: 170,
@@ -95,7 +105,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         gap: 10,
         alignItems: 'center',
-        margin: 10
-    }
+        margin: 10,
+        maxWidth: 700,
+        flexWrap: 'wrap'
+    },
+   
 })
 
