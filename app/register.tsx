@@ -70,7 +70,7 @@ export default function HomeScreen() {
 
         </View>
 
-      <Image source={require('../assets/images/image.png')} style={styles.image} />
+      <Image source={require('../assets/images/mancha2.png')} style={styles.image} />
 
       </View>
       <Image source={require('../assets/images/confeteParabaixo.png')} style={styles.confeteBaixo}></Image>
