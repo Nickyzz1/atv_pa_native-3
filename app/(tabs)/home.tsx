@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         backgroundColor: Colors.rosaClaro.background,
-        overflow:'scroll'
+        overflow:'scroll',
     },
     title: {
         fontFamily: 'jua',
