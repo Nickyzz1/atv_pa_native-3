@@ -12,6 +12,7 @@ export default function Card({title, price, image} : {title: string, price : str
                 <Text style={styles.text1} >{title}</Text>
                 <Text style={styles.text2}>R$ {price}</Text>
             </View>
+            <Image source={require('@/assets/images/cart.png')} width={10} height={10} style={styles.cart} />
         </View>
         </>
     )
@@ -21,7 +22,6 @@ const styles = StyleSheet.create({
     box : {
         width: 350,
         height: 80,
-        flexDirection: 'row',
         flexWrap: 'wrap',
         gap: 12,
         backgroundColor: Colors.azulPastel.background,
@@ -43,5 +43,9 @@ const styles = StyleSheet.create({
         fontFamily: 'jua',
         color: Colors.azulEscuro.background,
         fontSize: 20
+    },
+    cart : {
+        width: 40,
+        height: 40,
     }
 })
