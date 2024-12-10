@@ -12,23 +12,27 @@ export default function home() {
        return (
         <>
             <View style={styles.container}>
+
                 <View style={styles.header}>
 
-                {/* <Image source={require('@/assets/images/logo.png')} width={20} height={20} alt="" style={[styles.logo]} /> */}
-
-
+                    <Image
+                    source={require('@/assets/images/logo.png')}
+                    style={styles.logo} >
+                    </Image>
+                    
                     <Text style={styles.title} >
                         Home
                     </Text>
-                    
+
                 </View>
 
                 <Image source={require('@/assets/images/doces-confeitaria.jpg')} style={styles.banner} ></Image>
 
                 <View style={styles.box} >
-                <Text style={styles.subTitle} >
-                    Destaques
-                </Text>
+
+                    <Text style={styles.subTitle} >
+                        Destaques
+                    </Text>
 
                     <FlatList
                         keyExtractor={item => item.id}
@@ -38,17 +42,15 @@ export default function home() {
                                 <Card title={item.nome} image={item.imagem} price={item.preco}/>
                         )}}
                     />
-                </View>
 
-                <View style={styles.box}>
-
-                <Text style={styles.subTitle} >
-                    Produtos
-                </Text>
+                    <Text style={styles.subTitle} >
+                        Produtos
+                    </Text>
 
                     {dataTests.map((product, index) => (
                         <Card title={product.nome} price={product.preco} image={product.imagem} key={index}/>
                     ))}
+
                 </View>
 
             </View>
@@ -86,10 +88,10 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     logo : {
-        height: 20,
-        width: 20,
+        height: 40,
+        width: 40,
         alignSelf: 'flex-start',
-        top: 9,
+        top: 0,
         left: 9
     },
     banner : {
