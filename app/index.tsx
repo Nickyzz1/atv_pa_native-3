@@ -9,7 +9,6 @@ export default function HomeScreen() {
 
   const logar = async () => {
     try {
-      console.log('Nome: ', name);
       console.log('Email: ', email);
       console.log('Password: ', password);
       const response = await fetch('http://127.0.0.1:5000/login', {
@@ -30,16 +29,13 @@ export default function HomeScreen() {
       
       const jsonResponse = await response.json();
       console.log('Resposta da requisição: ', jsonResponse);
-      // Fazer um if aqui pra ver se a requisição foi bem sucedida!
       
       if (response.ok) {
         router.push("/(tabs)/home");
       }
 
-
     } catch(error) {
       console.error('Erro na requisição:', error);
-      // setResponse('Ocorreu um erro ao enviar os dados.');
     }
   }
   return (

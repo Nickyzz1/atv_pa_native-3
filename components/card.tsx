@@ -1,19 +1,21 @@
 import React from "react"
-import {StyleSheet, Image, View, Text, Button, TextInput, ImageSourcePropType} from 'react-native'
+import {StyleSheet, Image, View, Text, Button, TextInput, ImageSourcePropType, TouchableOpacity} from 'react-native'
 import { Colors } from "@/constants/Colors"
 
-export default function Card({title, price, image} : {title: string, price : string, image: string }) {
+export default function Card({ id, title, price, image } : { id: number, title: string, price : string, image: string }) {
 
     return (
         <>
-        <View style={styles.box} >
-            <Image source={require('@/assets/images/logo.png')} width={10} height={10} style={styles.img} />
-            <View>
-                <Text style={styles.text1} >{title}</Text>
-                <Text style={styles.text2}>R$ {price}</Text>
+            <View style={styles.box} >
+                <Image source={require('@/assets/images/logo.png')} width={10} height={10} style={styles.img} />
+                <View>
+                    <Text style={styles.text1} >{title}</Text>
+                    <Text style={styles.text2}>R$ {price}</Text>
+                </View>
+                <TouchableOpacity>
+                    <Image source={require('@/assets/images/cart.png')} width={10} height={10} style={styles.cart} />
+                </TouchableOpacity>
             </View>
-            <Image source={require('@/assets/images/cart.png')} width={10} height={10} style={styles.cart} />
-        </View>
         </>
     )
 }
