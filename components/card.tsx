@@ -8,8 +8,10 @@ export default function Card({title, price, image, quantidade} : {title: string,
         <>
         <View style={styles.box} >
 
-            <Image source={require('@/assets/images/logo.png')} width={10} height={10} style={styles.img} />
-            
+            <Image
+            source={require('@/assets/images/logo.png')}
+            width={10} height={10}
+            style={styles.img} />
             <View>
 
                 <Text style={styles.text1} >{title}</Text>
@@ -31,7 +33,7 @@ export default function Card({title, price, image, quantidade} : {title: string,
 
 const styles = StyleSheet.create({
     box : {
-        width: 350,
+        width: 300,
         height: 80,
         flexWrap: 'wrap',
         gap: 12,
