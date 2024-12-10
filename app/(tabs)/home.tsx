@@ -82,17 +82,16 @@ const styles = StyleSheet.create({
     },
     header : {
         display: 'flex',
+        width: '100%',
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20
     },
     logo : {
         height: 40,
         width: 40,
-        alignSelf: 'flex-start',
+        // alignSelf: 'flex-start',
         top: 0,
-        left: 9
     },
     banner : {
         height: 170,
