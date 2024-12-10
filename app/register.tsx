@@ -1,53 +1,84 @@
 import { Image, StyleSheet, Text, View, Platform, Dimensions, TextInput, TouchableOpacity  } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { useState } from 'react';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 
 export default function HomeScreen() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [text, setText] = useState('');
+  const register = async () => {
+    try {
+      console.log('Nome: ', name);
+      console.log('Email: ', email);
+      console.log('Password: ', password);
+      const response = await fetch('http://127.0.0.1:5000/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password
+        }),
+      });
+
+      if (!response.ok) {
+        alert('Erro na requisição!');
+        throw new Error(`Erro na requisição: ${response.statusText}`);
+      }
+
+      const jsonResponse = await response.json();
+      console.log('Resposta da requisição: ', jsonResponse);
+      // Fazer um if aqui pra ver se a requisição foi bem sucedida!
+      
+      if (response.ok) {
+        router.push("/");
+      }
+
+
+    } catch(error) {
+      console.error('Erro na requisição:', error);
+      // setResponse('Ocorreu um erro ao enviar os dados.');
+    }
+  }
 
   return (
    <>
     <View style={styles.container} >
+    <Image source={require('../assets/images/confeteParaCima.png')} style={styles.confete}></Image>
+
 
       <View style={styles.box} >
        
         <View style={styles.form} >
 
         <Text style={styles.label}>Nome</Text>
-        <TextInput
-        style={styles.input} 
-        value={text} 
-        />
+        <TextInput style={styles.input} value={name} onChangeText={setName}/>
 
         <Text style={styles.label}>Email</Text>
-        <TextInput
-        style={styles.input} 
-        value={text} 
-        />
+        <TextInput style={styles.input} value={email} onChangeText={setEmail}/>
 
         <Text style={styles.label}>Senha</Text>
-        <TextInput
-        style={styles.input} 
-        value={text} 
-        />
+        <TextInput style={styles.input} value={password} onChangeText={setPassword}/>
 
-        <button style={styles.btn} >
-          <Text style={styles.text} >
-          Cadastrar
-          </Text>
-        </button>
+        <TouchableOpacity style={styles.btn} onPress={register}>
+          <Text style={styles.text}>Cadastrar</Text>
+        </TouchableOpacity>
 
-        <Link href={'/'} style={styles.text2}>Já tem uma conta?</Link>
+        <Link href={'/'} style={styles.text2}>
+          <Text>Já tem uma conta? Clique aqui!</Text>
+        </Link>
 
         </View>
 
-      <Image
-            source={require('../assets/images/image.png')}  
-            style={styles.image} />
+      <Image source={require('../assets/images/image.png')} style={styles.image} />
 
       </View>
+      <Image source={require('../assets/images/confeteParabaixo.png')} style={styles.confeteBaixo}></Image>
+
     </View>
    </>
   );
@@ -56,6 +87,19 @@ export default function HomeScreen() {
 const {width, height} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
+  confete: {
+    position: 'absolute',
+    opacity: 0.2,
+    // zIndex: 2
+  },
+
+  confeteBaixo: {
+    position: 'absolute',
+    opacity: 0.2,
+    bottom: 0,
+    zIndex: -2
+  },
+
   container : {
     flex: 1,
     display: 'flex',
@@ -142,7 +186,8 @@ const styles = StyleSheet.create({
   text2: {
     textAlign: 'center',
     margin: 10,
-    color: Colors.marrom.background
+    color: Colors.marrom.background,
+    fontSize: 15
   },
   logo : {
     width: 100,

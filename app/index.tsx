@@ -1,47 +1,92 @@
 import { Image, StyleSheet, Text, View, Platform, Dimensions, TextInput, TouchableOpacity  } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { useState } from 'react';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 
 export default function HomeScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [text, setText] = useState('');
+  const logar = async () => {
+    try {
+      console.log('Nome: ', name);
+      console.log('Email: ', email);
+      console.log('Password: ', password);
+      const response = await fetch('http://127.0.0.1:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        }),
+      });
 
+      if (!response.ok) {
+        alert('Email ou senha errados!');
+        throw new Error(`Erro na requisição: ${response.statusText}`);
+      }
+      
+      const jsonResponse = await response.json();
+      console.log('Resposta da requisição: ', jsonResponse);
+      // Fazer um if aqui pra ver se a requisição foi bem sucedida!
+      
+      if (response.ok) {
+        router.push("/(tabs)/home");
+      }
+
+
+    } catch(error) {
+      console.error('Erro na requisição:', error);
+      // setResponse('Ocorreu um erro ao enviar os dados.');
+    }
+  }
   return (
    <>
-    <View style={styles.container} >
+
+    <View style={styles.container}>
+
+      <Image source={require('../assets/images/confeteParaCima.png')} style={styles.confete}></Image>
 
       <View style={styles.box} >
        
         <View style={styles.form} >
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-        style={styles.input2} 
-        value={text} 
-        />
 
-        <Text style={styles.label}>Senha</Text>
-        <TextInput
-        style={styles.input} 
-        value={text} 
-        />
+          <View style={styles.inputBox}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput style={styles.input} value={email} onChangeText={setEmail}/>
+          </View>
+        
+          <View style={styles.inputBox}>
+            <Text style={styles.label}>Senha</Text>
+            <TextInput style={styles.input} value={password} onChangeText={setPassword}/>
+            <Link href={'/register'} style={styles.text2}>
+              <Text>Esqueceu sua senha?</Text>
+            </Link>
+          </View>
 
-        <button style={styles.btn} >
-          <Link href={'/(tabs)/home'} style={styles.text} >
-          Entrar
-          </Link >
-        </button>
 
-        <Link href={'/register'} style={styles.text2}> Não tem uma conta?</Link>
+          <View style={styles.inputBox}>
+            <TouchableOpacity style={styles.btn} onPress={logar}>
+              <Text style={styles.text}>Entrar</Text>
+            </TouchableOpacity>
+
+            <Link href={'/register'} style={styles.text2}>
+              <Text>Não tem uma conta? Clique aqui!</Text>
+            </Link>
+          </View>
+
+        </View>
+
+        <Image source={require('../assets/images/image.png')} style={styles.image} />
 
       </View>
 
-      <Image
-            source={require('../assets/images/image.png')}  
-            style={styles.image} />
+      <Image source={require('../assets/images/confeteParabaixo.png')} style={styles.confeteBaixo}></Image>
 
-      </View>
     </View>
+
    </>
   );
 }
@@ -49,12 +94,32 @@ export default function HomeScreen() {
 const {width, height} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
+  inputBox: {
+    display: 'flex',
+    width: width / 1.5,
+    maxWidth: 500
+  },
+
+  confete: {
+    position: 'absolute',
+    opacity: 0.2,
+    // zIndex: 2
+  },
+
+  confeteBaixo: {
+    position: 'absolute',
+    opacity: 0.2,
+    bottom: 0,
+    zIndex: -2
+  },
+
   container : {
     flex: 1,
     display: 'flex',
     backgroundColor: Colors.rosaRoxo.background,
     overflow: 'hidden'
   },
+
   box: {
     display:'flex',
     height: height,
@@ -62,26 +127,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   image: {
     width: width * 1.8 ,
     height: height / 0.95 ,
     marginTop: 20,
     maxWidth: width,
-    maxHeight: height - 100
+    maxHeight: height - 100,
   },
+
   label: {
-    fontFamily: 'jua' ,
+    fontFamily: 'jua',
     fontSize: 33,
-    marginBottom: 1,
+    // marginBottom: 1,
     color: Colors.font.background
   },
+
   input: {
     height: 40,
     // borderColor: '#ddd',
     borderWidth: 1,
-    width: '40%',
+    width: '100%',
     maxWidth: 500,
-    marginBottom: 20,
+    // marginBottom: 20,
     padding: 5,
     paddingLeft: 10,
     borderRadius: 5,
@@ -97,39 +165,43 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0
   
   },
-  input2: {
-    padding: 5,
-    height: 40,
-    maxWidth: 600,
-    // borderColor: '#ddd',
-    borderWidth: 1,
-    width: '60%',
-    marginBottom: 20,
-    paddingLeft: 10,
-    borderRadius: 5,
-    outlineColor: Colors.rosaClaro.background,
-    backgroundColor: Colors.rosaRoxo.background,
 
-    borderColor: Colors.marrom.background,
-    borderTopWidth: 2,
-    borderEndWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    borderLeftWidth: 0
+  // input2: {
+  //   padding: 5,
+  //   height: 40,
+  //   maxWidth: 600,
+  //   // borderColor: '#ddd',
+  //   borderWidth: 1,
+  //   width: '60%',
+  //   // marginBottom: 20,
+  //   paddingLeft: 10,
+  //   borderRadius: 5,
+  //   outlineColor: Colors.rosaClaro.background,
+  //   backgroundColor: Colors.rosaRoxo.background,
+
+  //   borderColor: Colors.marrom.background,
+  //   borderTopWidth: 2,
+  //   borderEndWidth: 0,
+  //   borderRightWidth: 0,
+  //   borderBottomWidth: 0,
+  //   borderLeftWidth: 0
   
-  },
+  // },
+
   textOutput: {
-    marginTop: 20,
+    // marginTop: 20,
     fontSize: 16,
   },
+
   form : {
     position:'absolute',
     zIndex: 10,
-    // backgroundColor: Colors.azul.background,
     width: width - 10,
     height: height / 3.4,
     alignItems: 'center',
+    gap: 20
   },
+
   btn: {
     display: 'flex',
     alignItems: 'center',
@@ -142,8 +214,9 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf: 'center',
     borderColor: Colors.rosaClaro.background,
-    borderTopWidth: 1
+    borderTopWidth: 1,
   },
+
   buttonHovered : {
     shadowColor: Colors.rosaClaro.background,  
     shadowOffset: { width: 200, height: 200 },  
@@ -151,18 +224,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,     
     elevation: 3, 
   },
+
   text : {
     color : Colors.white.background,
     fontFamily: 'jua',
     fontSize: 23,
   },
+
   text2: {
     textAlign: 'center',
-    margin: 10,
-    color: Colors.marrom.background
+    // margin: 10,
+    color: Colors.marrom.background,
+    fontSize: 15,
+    marginTop: 5
   },
+
   logo : {
     width: 100,
     height: 100
   },
+
 });
