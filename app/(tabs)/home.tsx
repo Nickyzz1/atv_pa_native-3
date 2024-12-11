@@ -5,6 +5,7 @@ import { Colors } from "@/constants/Colors"
 import Card from '@/components/card'
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
+import { router } from "expo-router"
 
 
 interface Product {
@@ -31,12 +32,13 @@ export default function home() {
         }
     }
 
+
+
     useEffect(() => {
         fetchProducts();
     }, []);
 
     const addInCart = async (id: number, name: string, price: number, amount: number) => {
-
         try {
             const response = await axios.post('http://127.0.0.1:5000/cart', {
                 id: id,
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
         fontFamily: 'jua',
         fontSize: 30,
         color: Colors.font.background,
-        marginLeft: 30,
+        // marginLeft: 30,
         marginTop : 10,
     },
 
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
         gap: 10,
         alignItems: 'center',
         margin: 10,
-        maxWidth: width / 1.1,
+        maxWidth: width,
         flexWrap: 'wrap',
         justifyContent: 'center'
     },
