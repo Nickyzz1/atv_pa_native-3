@@ -29,7 +29,6 @@ export default function Card({ id, title, price, image, quantidade, functionButt
                             <Text style={styles.text2}>R$ {price}</Text>
 
                     </View>
-
                 </View>
 
                 {!quantidade ? (

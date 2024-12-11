@@ -3,7 +3,6 @@ import React from "react"
 import {View, Text, Button, TextInput, StyleSheet, Image, Dimensions,TouchableOpacity, FlatList} from 'react-native'
 import { Colors } from "@/constants/Colors"
 import Card from '@/components/card'
-import dataTests from '@/constants/dataTests.json'
 import sales from '@/constants/sends.json'
 
 
@@ -13,20 +12,24 @@ export default function cart () {
     return(
         <>
         <View style={styles.container} >
+            
             <View style={styles.header}>
                 <Image source={require('@/assets/images/goBack.png')} style={styles.goBack}></Image>
                 <Text style={styles.title}>Cart</Text>
             </View>
+
             <View style={styles.content} >
-                <TouchableOpacity style={styles.btn}>finalizar</TouchableOpacity>
+                <TouchableOpacity style={styles.btn}>
+                    finalizar
+                </TouchableOpacity>
                 {sales.map((sale, index)=> {
                     return(
                         <>
-                        <Card quantidade={sale.quantidade} price={sale.preco} title={sale.nome} image={require('@/assets/images/logo.png')} />
+                            <Card quantidade={sale.quantidade} price={sale.preco} title={sale.nome} image={require('@/assets/images/logo.png')} />
                         </>
                     )
                 })}
-        </View>
+            </View>
         </View>
 
         </>
@@ -44,17 +47,22 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     goBack : {
-        width: 40,
-        height: 40,
+        height: width / 10,
+        width: width / 10,
+        alignSelf: 'flex-start', 
+        marginLeft: 10,
+        minWidth: 50,
+        minHeight: 50,
     },
     title : {
+        
         fontFamily: 'jua',
-        fontSize: 30,
+        fontSize: 35,
         color: Colors.font.background,
         textAlign: 'center',
         position: 'absolute',
         left: '50%', 
-        transform: [{ translateX: -width / 15 }],
+        transform: [{ translateX: - width / 12 }],
     },
     btn : {
         backgroundColor: Colors.font.background,
@@ -69,21 +77,21 @@ const styles = StyleSheet.create({
     
     },
     content : {
-        flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: 300,
         alignSelf: 'center',
         gap: 3,
+        width: '90%'
     },
     container : {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        alignSelf: 'center',
-        gap: 3,
+        display: 'flex',
+        backgroundColor: Colors.rosaClaro.background,
         overflow: 'scroll',
-        backgroundColor: Colors.rosaClaro.background
+        height: height,
+        width: width,
+        alignItems: 'center',
+        padding: 10,
+        overflowX: 'hidden'
     },
 
 })
