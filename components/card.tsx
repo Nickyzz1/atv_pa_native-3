@@ -7,11 +7,13 @@ type CardProps = {
     title: string;
     price: number;
     image: string;
-    quantidade?: number;
+    amount?: number;
     functionButton: () => void;
+    icon: ImageSourcePropType;
+    displayIcon: boolean
   };
 
-export default function Card({ id, title, price, image, quantidade, functionButton: handleFunction } : CardProps) {
+export default function Card({ id, title, price, image, amount, functionButton: handleFunction, displayIcon, icon } : CardProps) {
 
     return (
         <>
@@ -23,17 +25,17 @@ export default function Card({ id, title, price, image, quantidade, functionButt
                     <View style={styles.namePrice}>
                         <Text style={styles.text1} >{title}</Text>
 
-                        {quantidade ? (
-                            <Text style={styles.text2}>Quantidade {quantidade}</Text>
+                        {amount ? (
+                            <Text style={styles.text2}>Quantidade {amount}</Text>
                         ) : null}
                             <Text style={styles.text2}>R$ {price}</Text>
 
                     </View>
                 </View>
 
-                {!quantidade ? (
+                {displayIcon ? (
                     <TouchableOpacity onPress={handleFunction}>
-                        <Image source={require('@/assets/images/cart.png')} width={10} height={10} style={styles.cart} />
+                        <Image source={icon} width={10} height={10} style={styles.cart} />
                     </TouchableOpacity>
                 ) : null}
 
@@ -81,13 +83,13 @@ const styles = StyleSheet.create({
     text1 : {
         fontFamily: 'jua',
         color: Colors.azul.background,
-        fontSize: 18
+        fontSize: 20
     },
 
     text2 : {
         fontFamily: 'jua',
         color: Colors.azulEscuro.background,
-        fontSize: 20
+        fontSize: 25
     },
 
     cart : {

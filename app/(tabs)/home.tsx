@@ -1,44 +1,70 @@
 import { FontDisplay } from "expo-font"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {View, Text, Button, TextInput, StyleSheet, Image, Dimensions, FlatList} from 'react-native'
 import { Colors } from "@/constants/Colors"
 import Card from '@/components/card'
-import dataTests from '@/constants/dataTests.json'
-import { router } from "expo-router"
+import axios from 'axios';
+import * as ImagePicker from 'expo-image-picker';
+
+
+interface Product {
+    id: number,
+    name: string,
+    price: number,
+    amount: number,
+    image: string
+}
 
 export default function home() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get(`http://127.0.0.1:5000/product`);
+            setProducts(response.data);
+            console.log(response);
+        } catch (error) {
+            console.log('Erro ao buscar produtos: ', error)
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
     const addInCart = async (id: number, name: string, price: number, amount: number) => {
-        console.log('Id', id);
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/cart', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
+            const response = await axios.post('http://127.0.0.1:5000/cart', {
                 id: id,
                 name: name,
                 price: price,
                 amount: amount
-              }),
             });
-      
-            if (!response.ok) {
-              alert('Erro na requisição!');
-              throw new Error(`Erro na requisição: ${response.statusText}`);
-            }
-      
-            const jsonResponse = await response.json();
-            console.log('Resposta da requisição: ', jsonResponse);
-            
-          } catch(error) {
+            console.log('Resposta da requisição: ', response.data);
+        } catch (error) {
             console.error('Erro na requisição:', error);
-          }
+        }
+    }
+
+    const renderItems = ({item} : {item : Product}) => {
+        return (
+            <Card displayIcon={true} icon={require('../../assets/images/cart.png')} functionButton={() => addInCart(item.id, item.name, item.price, item.amount)} id={item.id} title={item.name} price={item.price} image={item.image}/>
+        )
+    }
+
+    if (loading) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>Loading...</Text>
+            </View>
+        );
     }
     
-       return (
+    return (
         <>
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -46,28 +72,17 @@ export default function home() {
                     <Text style={styles.title}>Home</Text>
                 </View>
 
-                <View style={styles.caixaFofa}>
+                <View>
                     <Image source={require('@/assets/images/doces-confeitaria.jpg')} style={styles.banner} ></Image>
 
                     <View style={styles.box} >
                         <Text style={styles.subTitle}>Destaques</Text>
-                        {/* <FlatList
-                            data={dataTests}
-                            renderItem={({ item }) => {
-                                return (
-                                    <Card id={item.id} title={item.nome} image={item.imagem} price={item.preco} />
-                                );
-                            }}
-                        /> */}
-                        {dataTests.map((product, index) => (
-                            <Card functionButton={() => addInCart(product.id, product.name, product.price, product.amount)} id={product.id} title={product.name} price={product.price} image={product.image} key={index}/>
-                        ))}
+
+                        <FlatList style={styles.flatList} data={products} keyExtractor={(item) => item.id.toString()} renderItem={renderItems}/>
 
                         <Text style={styles.subTitle}>Produtos</Text>
 
-                        {dataTests.map((product, index) => (
-                            <Card functionButton={() => addInCart(product.id, product.name, product.price, product.amount)} id={product.id} title={product.name} price={product.price} image={product.image} key={index}/>
-                        ))}
+                        <FlatList style={styles.flatList} data={products} keyExtractor={(item) => item.id.toString()} renderItem={renderItems}/>
 
                     </View>
                 </View>
@@ -81,8 +96,8 @@ export default function home() {
 const {width, height} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-    caixaFofa: {
-
+    flatList: {
+        width: '100%',
     },
 
     container : {
