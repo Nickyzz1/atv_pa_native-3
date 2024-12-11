@@ -30,7 +30,7 @@ export default function cart () {
                 {sales.map((sale, index)=> {
                     return(
                         <>
-                        <Card functionButton={funcaoFofa} id={sale.id} quantidade={sale.amount} price={sale.price} title={sale.name} image={require('@/assets/images/logo.png')} />
+                            <Card functionButton={funcaoFofa} id={sale.id} amount={sale.amount} price={sale.price} title={sale.name} displayIcon={true} icon={require('../../assets/images/cart.png')} image={require('@/assets/images/logo.png')} />
                         </>
                     )
                 })}

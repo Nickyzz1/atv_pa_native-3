@@ -17,9 +17,7 @@ export default function TabLayout() {
 
     tabBarStyle: {
       backgroundColor: Colors.rosaRoxo.background,
-      borderTopWidth: 0,
-      paddingBottom: 10, 
-      height: 70, 
+      height: 45, 
     }
 });
 
@@ -29,14 +27,9 @@ export default function TabLayout() {
         tabBarStyle: Platform.select({
           ios: {
             ...styles.tabBarStyle
-            // position: 'absolute',
-            // backgroundColor: Colors.rosaRoxo.background,
-            // borderTopWidth: 0,
           },
           default: {
-            ...styles.tabBarStyle
-            // backgroundColor: Colors.rosaRoxo.background,
-            // borderTopWidth: 0, 
+            ...styles.tabBarStyle 
           },
         }),
         tabBarItemStyle: {
