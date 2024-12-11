@@ -7,7 +7,6 @@ import sales from '@/constants/sales.json'
 import { Link, router } from "expo-router"
 import axios from "axios"
 
-
 const {width, height} = Dimensions.get('window')
 
 interface Product {
