@@ -1,73 +1,73 @@
 [
     {
       "id": 1,
-      "nome": "Bolo de Chocolate",
-      "preco": "25.50",
-      "imagem": "@/assets/images/luaDeMel.jpg",
-      "quantidade": 5
+      "name": "Bolo de Chocolate",
+      "price": 25.50,
+      "image": "@/assets/images/luaDeMel.jpg",
+      "amount": 5
     },
     {
       "id": 2,
-      "nome": "Sonho",
-      "preco": "25.50",
-      "imagem": "@/assets/images/sonho.jpg",
-      "quantidade": 10
+      "name": "Sonho",
+      "price": 25.50,
+      "image": "@/assets/images/sonho.jpg",
+      "amount": 10
     },
     {
       "id": 3,
-      "nome": "Donuts",
-      "preco": "25.50",
-      "imagem": "@/assets/images/donuts.jpg",
-      "quantidade": 3
+      "name": "Donuts",
+      "price": 25.50,
+      "image": "@/assets/images/donuts.jpg",
+      "amount": 3
     },
     {
       "id": 4,
-      "nome": "Bolo de Morango",
-      "preco": "30.00",
-      "imagem": "@/assets/images/boloDeMorango.jpg",
-      "quantidade": 2
+      "name": "Bolo de Morango",
+      "price": 30.00,
+      "image": "@/assets/images/boloDeMorango.jpg",
+      "amount": 2
     },
     {
       "id": 5,
-      "nome": "Pudim",
-      "preco": "18.00",
-      "imagem": "@/assets/images/pudim.jpg",
-      "quantidade": 7
+      "name": "Pudim",
+      "price": 18.00,
+      "image": "@/assets/images/pudim.jpg",
+      "amount": 7
     },
     {
       "id": 6,
-      "nome": "Torta de Limão",
-      "preco": "20.00",
-      "imagem": "@/assets/images/tortaDeLimao.jpg",
-      "quantidade": 4
+      "name": "Torta de Limão",
+      "price": 20.00,
+      "image": "@/assets/images/tortaDeLimao.jpg",
+      "amount": 4
     },
     {
       "id": 7,
-      "nome": "Bolo de Cenoura",
-      "preco": "22.00",
-      "imagem": "@/assets/images/boloDeCenoura.jpg",
-      "quantidade": 6
+      "name": "Bolo de Cenoura",
+      "price": 22.00,
+      "image": "@/assets/images/boloDeCenoura.jpg",
+      "amount": 6
     },
     {
       "id": 8,
-      "nome": "Churros",
-      "preco": "15.00",
-      "imagem": "@/assets/images/churros.jpg",
-      "quantidade": 8
+      "name": "Churros",
+      "price": 15.00,
+      "image": "@/assets/images/churros.jpg",
+      "amount": 8
     },
     {
       "id": 9,
-      "nome": "Torta de Maçã",
-      "preco": "18.50",
-      "imagem": "@/assets/images/tortaDeMaca.jpg",
-      "quantidade": 3
+      "name": "Torta de Maçã",
+      "price": 18.50,
+      "image": "@/assets/images/tortaDeMaca.jpg",
+      "amount": 3
     },
     {
       "id": 10,
-      "nome": "Queijadinha",
-      "preco": "12.50",
-      "imagem": "@/assets/images/queijadinha.jpg",
-      "quantidade": 9
+      "name": "Queijadinha",
+      "price": 12.50,
+      "image": "@/assets/images/queijadinha.jpg",
+      "amount": 9
     }
   ]
   

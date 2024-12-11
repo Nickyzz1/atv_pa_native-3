@@ -9,6 +9,11 @@ import sales from '@/constants/sends.json'
 const {width, height} = Dimensions.get('window')
 
 export default function cart () {
+
+    const funcaoFofa = () => {
+
+    }
+    
     return(
         <>
         <View style={styles.container} >
@@ -25,7 +30,7 @@ export default function cart () {
                 {sales.map((sale, index)=> {
                     return(
                         <>
-                            <Card quantidade={sale.quantidade} price={sale.preco} title={sale.nome} image={require('@/assets/images/logo.png')} />
+                        <Card functionButton={funcaoFofa} id={send.id} quantidade={send.amount} price={send.price} title={send.name} image={require('@/assets/images/logo.png')} />
                         </>
                     )
                 })}
