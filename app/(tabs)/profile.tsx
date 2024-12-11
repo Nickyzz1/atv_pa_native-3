@@ -6,7 +6,11 @@ import { Link } from "expo-router";
 
 export default function Profile() {
     // estado para armazenar o usuário
-    const [user, setUser] = useState<{ name: string, email: string} | null>(null);
+    const [user, setUser] = useState<{ name: string, email: string, id: number, password : string} | null>(null);
+    const [curPass, setCurPass] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [email, setEmail] = useState('')
+    const [userName, setUserName] = useState('')
 
     // useEffect para pegar os dados do AsyncStorage assim que o componente for montado
     useEffect(() => {
@@ -14,10 +18,10 @@ export default function Profile() {
             try {
                 const storedUser = await AsyncStorage.getItem('user');
                 if (storedUser) {
-                    setUser(JSON.parse(storedUser)); // Atualiza o estado com os dados do usuário
+                    setUser(JSON.parse(storedUser)); 
                 }
             } catch (error) {
-                console.error('Erro ao carregar o usuário do AsyncStorage:', error);
+                console.error('Erro ao carregar o usuário', error);
             }
         };
 
@@ -26,8 +30,50 @@ export default function Profile() {
 
     // se o user não existir vai exibir carregando
     if (user === null) {
-        return <Text>Carregando...</Text>;
+        return (
+
+          <>
+          {/* <View style={styles.containerLoading} > */}
+                <Text style={styles.loading}>Loading...</Text>
+          {/* </View> */}
+          </>
+        )
     }
+
+    const updateInfo = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/user/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: user.id,  // Remova o 'user' e passe os campos diretamente
+                    name: userName,
+                    email: email,
+                    password: curPass,
+                    newPassword: newPassword
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            
+            const jsonResponse = await response.json();
+            console.log('Resposta da requisição: ', jsonResponse);
+    
+            if (response.status === 400) {
+                alert("Senha incorreta");
+            } else {
+                alert("Atualizado com sucesso");
+            }
+    
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+        }
+    };
+    
 
     return (
         <View style={styles.container}>
@@ -48,6 +94,7 @@ export default function Profile() {
                         value={user?.name ?? ''}
                         editable={true}
                         style={styles.input}
+                        onChange={(e) => {setUserName(e.nativeEvent.text)}}
                     />
                 </View>
 
@@ -55,8 +102,9 @@ export default function Profile() {
                     <Text style={styles.subtitle}>Email</Text>
                      <TextInput
                         value={user?.email ?? ''}
-                        editable={false}
+                        editable={true}
                         style={styles.input}
+                    
                     />
                 </View>
 
@@ -65,6 +113,8 @@ export default function Profile() {
                      <TextInput
                         editable={true}
                         style={styles.input}
+                        onChange={(e) => {setNewPassword(e.nativeEvent.text)}}
+                        secureTextEntry={true}
                     />
                 </View>
 
@@ -73,11 +123,13 @@ export default function Profile() {
                      <TextInput
                         editable={true}
                         style={styles.input}
+                        onChange={(e) => {setCurPass(e.nativeEvent.text)}}
+                        secureTextEntry={true}
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btn}>
-                        Finalizar
+                <TouchableOpacity onPress={() => updateInfo()} style={styles.btn}>
+                        <Text style={styles.btnTitle} >Finalizar</Text>
                 </TouchableOpacity>
 
             </View>
@@ -96,6 +148,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: width,
         height: height
+    },
+    containerLoading : 
+    {
+        flex: 1,
+        backgroundColor: Colors.rosaClaro.background,
+        width: width,
+        height: height,
     },
     header: {
         flexDirection: 'row',
@@ -116,7 +175,12 @@ const styles = StyleSheet.create({
         fontFamily: 'jua',
         fontSize: 25,
         color: Colors.font.background,
-
+    },
+    btnTitle: {
+        fontFamily: 'jua',
+        fontSize: 25,
+        color: Colors.white.background,
+        textAlign: 'center'
     },
     input : {
         backgroundColor: Colors.rosaRoxo.background,
@@ -128,14 +192,12 @@ const styles = StyleSheet.create({
     },
     btn : {
         backgroundColor: Colors.font.background,
-        width: 100,
-        textAlign: 'center',
+        width: 130,
         color: Colors.white.background,
         borderRadius: 5,
         padding: 5,
         fontFamily: 'jua',
         alignSelf: 'center',
-        marginBottom: 4
     
     },
     content : {
@@ -155,4 +217,12 @@ const styles = StyleSheet.create({
         left: '50%', 
         transform: [{ translateX: - width / 9 }],
     },
+    loading: {
+        fontFamily: 'jua',
+        fontSize: 35,
+        color: Colors.font.background,
+        textAlign: 'center',
+        alignSelf: 'center',
+        marginTop: 20
+    }
 });
