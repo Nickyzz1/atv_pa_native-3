@@ -10,9 +10,7 @@ export default function HomeScreen() {
 
   const register = async () => {
     try {
-      console.log('Nome: ', name);
-      console.log('Email: ', email);
-      console.log('Password: ', password);
+
       const response = await fetch('http://127.0.0.1:5000/user', {
         method: 'POST',
         headers: {

@@ -10,8 +10,6 @@ export default function HomeScreen() {
 
   const logar = async () => {
     try {
-      console.log('Email: ', email);
-      console.log('Password: ', password);
       const response = await fetch('http://127.0.0.1:5000/login', {
         method: 'POST',
         headers: {
@@ -31,7 +29,6 @@ export default function HomeScreen() {
       const jsonResponse = await response.json()
       .then(async (data) => {
         const user = data.user;
-        console.log(user);
         if (response.ok) {
           await AsyncStorage.setItem('user', JSON.stringify(user));
           router.push("/(tabs)/home");
@@ -61,7 +58,7 @@ export default function HomeScreen() {
         
           <View style={styles.inputBox}>
             <Text style={styles.label}>Senha</Text>
-            <TextInput style={styles.input} value={password} onChangeText={setPassword}/>
+            <TextInput secureTextEntry={true} style={styles.input} value={password} onChangeText={setPassword}/>
             <Link href={'/register'} style={styles.text2}>
               <Text>Esqueceu sua senha?</Text>
             </Link>
