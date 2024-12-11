@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     box : {
         maxWidth: width,
         width: '95%',
-        height: 80,
+        height: 100,
         gap: 12,
         backgroundColor: Colors.azulPastel.background,
         borderRadius: 10,
