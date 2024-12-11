@@ -58,7 +58,7 @@ export default function HomeScreen() {
         <TextInput style={styles.input} value={email} onChangeText={setEmail}/>
 
         <Text style={styles.label}>Senha</Text>
-        <TextInput style={styles.input} value={password} onChangeText={setPassword}/>
+        <TextInput textContentType='password' style={styles.input} value={password} onChangeText={setPassword}/>
 
         <TouchableOpacity style={styles.btn} onPress={register}>
           <Text style={styles.text}>Cadastrar</Text>

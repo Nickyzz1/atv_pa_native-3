@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View, Platform, Dimensions, TextInput, Touchab
 import { Colors } from '@/constants/Colors';
 import { useState } from 'react';
 import { Link, router } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   const [email, setEmail] = useState('');
@@ -27,12 +28,16 @@ export default function HomeScreen() {
         throw new Error(`Erro na requisição: ${response.statusText}`);
       }
       
-      const jsonResponse = await response.json();
+      const jsonResponse = await response.json()
+      .then(async (data) => {
+        const user = data.user;
+        console.log(user);
+        if (response.ok) {
+          await AsyncStorage.setItem('user', JSON.stringify(user));
+          router.push("/(tabs)/home");
+        }
+      });
       console.log('Resposta da requisição: ', jsonResponse);
-      
-      if (response.ok) {
-        router.push("/(tabs)/home");
-      }
 
     } catch(error) {
       console.error('Erro na requisição:', error);
