@@ -4,7 +4,7 @@ import {View, Text, Button, TextInput, StyleSheet, Image, Dimensions,TouchableOp
 import { Colors } from "@/constants/Colors"
 import Card from '@/components/card'
 import dataTests from '@/constants/dataTests.json'
-import sends from '@/constants/sends.json'
+import sales from '@/constants/sends.json'
 
 
 const {width, height} = Dimensions.get('window')
@@ -19,10 +19,10 @@ export default function cart () {
             </View>
             <View style={styles.content} >
                 <TouchableOpacity style={styles.btn}>finalizar</TouchableOpacity>
-                {sends.map((send, index)=> {
+                {sales.map((sale, index)=> {
                     return(
                         <>
-                        <Card quantidade={send.quantidade} price={send.preco} title={send.nome} image={require('@/assets/images/logo.png')} />
+                        <Card quantidade={sale.quantidade} price={sale.preco} title={sale.nome} image={require('@/assets/images/logo.png')} />
                         </>
                     )
                 })}
