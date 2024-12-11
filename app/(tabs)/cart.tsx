@@ -3,7 +3,7 @@ import React from "react"
 import {View, Text, Button, TextInput, StyleSheet, Image, Dimensions,TouchableOpacity, FlatList} from 'react-native'
 import { Colors } from "@/constants/Colors"
 import Card from '@/components/card'
-import sales from '@/constants/sends.json'
+import sales from '@/constants/sales.json'
 
 
 const {width, height} = Dimensions.get('window')
@@ -30,7 +30,7 @@ export default function cart () {
                 {sales.map((sale, index)=> {
                     return(
                         <>
-                        <Card functionButton={funcaoFofa} id={send.id} quantidade={send.amount} price={send.price} title={send.name} image={require('@/assets/images/logo.png')} />
+                        <Card functionButton={funcaoFofa} id={sale.id} quantidade={sale.amount} price={sale.price} title={sale.name} image={require('@/assets/images/logo.png')} />
                         </>
                     )
                 })}
