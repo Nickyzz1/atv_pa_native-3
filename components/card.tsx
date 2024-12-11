@@ -25,10 +25,10 @@ export default function Card({ id, title, price, image, amount, functionButton: 
                     <View style={styles.namePrice}>
                         <Text style={styles.text1} >{title}</Text>
 
+                        <Text style={styles.text2}>R$ {price},00</Text>
                         {amount ? (
-                            <Text style={styles.text2}>Quantidade {amount}</Text>
+                            <Text style={styles.text3}>Quantidade {amount}</Text>
                         ) : null}
-                            <Text style={styles.text2}>R$ {price}</Text>
 
                     </View>
                 </View>
@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         paddingHorizontal: 15,
-        margin: 4,
+        margin: 'auto',
+        marginVertical: 4,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -90,6 +91,12 @@ const styles = StyleSheet.create({
         fontFamily: 'jua',
         color: Colors.azulEscuro.background,
         fontSize: 25
+    },
+
+    text3 : {
+        fontFamily: 'jua',
+        color: Colors.azulEscuro.background,
+        fontSize: 20
     },
 
     cart : {
