@@ -4,6 +4,7 @@ import {View, Text, Button, TextInput, StyleSheet, Image, Dimensions,TouchableOp
 import { Colors } from "@/constants/Colors"
 import Card from '@/components/card'
 import sales from '@/constants/sales.json'
+import { Link } from "expo-router"
 
 
 const {width, height} = Dimensions.get('window')
@@ -19,7 +20,12 @@ export default function cart () {
         <View style={styles.container} >
             
             <View style={styles.header}>
-                <Image source={require('@/assets/images/goBack.png')} style={styles.goBack}></Image>
+                <Link href={"/home"} >
+                    <Image
+                    source={require('@/assets/images/goBack.png')}
+                    style={styles.goBack}>
+                    </Image>
+                </Link>
                 <Text style={styles.title}>Cart</Text>
             </View>
 
