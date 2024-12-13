@@ -16,6 +16,13 @@ export default function TabLayout() {
       marginTop: 15
     },
 
+    icon2: {
+      width: 35,
+      height: 35,
+      tintColor: Colors.white.background,
+      marginTop: 15
+    },
+
     tabBarStyle: {
       backgroundColor: Colors.rosaRoxo.background,
       height: 55,
@@ -49,6 +56,15 @@ export default function TabLayout() {
       </Tabs.Screen>
 
       <Tabs.Screen
+        name='analytics'
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (<Image source={require('@/assets/images/analytics.png')} style={styles.icon2}/>),
+          tabBarLabel: () => null
+          }}>
+      </Tabs.Screen>
+
+      {/* <Tabs.Screen
         name='order'
         options={{
           headerShown: false,
@@ -73,7 +89,7 @@ export default function TabLayout() {
           tabBarIcon: () => (<Image source={require('@/assets/images/profile.png')} style={styles.icon}/>),
           tabBarLabel: () => null
           }}>
-      </Tabs.Screen>
+      </Tabs.Screen> */}
 
     </Tabs>
   );

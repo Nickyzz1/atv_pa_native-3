@@ -58,15 +58,25 @@ export default function cart () {
 
     const sellProducts = async () => {
         try {
-            const response = await axios.post(`http://127.0.0.1:5000/sell`);
-            setProducts(response.data);
-            console.log(response);
+            // Fazendo a requisição com o axios, e configurando para tratar a resposta como um blob
+            const response = await axios.post('http://127.0.0.1:5000/sell', {}, {
+                responseType: 'blob'  // Especifica que esperamos um arquivo binário (PDF)
+            });
+    
+            // Criar um link para download do arquivo PDF
+            const blob = response.data;  // Dados binários do PDF
+            const link = document.createElement('a');  // Criar um link de download
+            link.href = URL.createObjectURL(blob);  // Criar uma URL temporária para o PDF
+            link.download = 'nota_fiscal.pdf';  // Definir o nome do arquivo a ser baixado
+            link.click();  // Simular o clique para iniciar o download
+    
+            console.log('PDF gerado com sucesso');
         } catch (error) {
-            console.log('Erro ao buscar produtos: ', error)
+            console.log('Erro ao gerar a nota fiscal: ', error);
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     if (loading) {
         return (

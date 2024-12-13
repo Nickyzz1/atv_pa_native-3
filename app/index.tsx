@@ -31,7 +31,12 @@ export default function HomeScreen() {
         const user = data.user;
         if (response.ok) {
           await AsyncStorage.setItem('user', JSON.stringify(user));
-          router.push("/(tabs)/home");
+          if (user.isAdmin == true) {
+            router.push("/(tabsAdmin)/home");
+          }
+          else {
+            router.push("/(tabs)/home");
+          }
         }
       });
       console.log('Resposta da requisição: ', jsonResponse);

@@ -9,11 +9,13 @@ type CardProps = {
     image: string;
     amount?: number;
     functionButton: () => void;
+    functionButtonTwo?: () => void;
     icon: ImageSourcePropType;
+    iconTwo?: ImageSourcePropType;
     displayIcon: boolean
   };
 
-export default function Card({ id, title, price, image, amount, functionButton: handleFunction, displayIcon, icon } : CardProps) {
+export default function Card({ id, title, price, image, amount, functionButton, displayIcon, icon, functionButtonTwo, iconTwo } : CardProps) {
 
     return (
         <>
@@ -23,7 +25,7 @@ export default function Card({ id, title, price, image, amount, functionButton: 
                     <Image source={require('@/assets/images/logo.png')} width={10} height={10} style={styles.img} />
                 
                     <View style={styles.namePrice}>
-                        <Text style={styles.text1} >{title}</Text>
+                        <Text style={styles.text1} >{title.length > 15 ? title.substring(0, 15) + "..." : title}</Text>
 
                         <Text style={styles.text2}>R$ {price},00</Text>
                         {amount ? (
@@ -34,10 +36,18 @@ export default function Card({ id, title, price, image, amount, functionButton: 
                 </View>
 
                 {displayIcon ? (
-                    <TouchableOpacity onPress={handleFunction}>
-                        <Image source={icon} width={10} height={10} style={styles.cart} />
-                    </TouchableOpacity>
+                    <View style={{flexDirection: 'row', gap: 4}}>
+                        <TouchableOpacity onPress={functionButton}>
+                            <Image source={icon} width={10} height={10} style={styles.cart} />
+                        </TouchableOpacity>
+                        {iconTwo ? (
+                            <TouchableOpacity onPress={functionButtonTwo}>
+                                <Image source={iconTwo} width={10} height={10} style={styles.cart} />
+                            </TouchableOpacity>
+                        ): null}
+                    </View>
                 ) : null}
+
 
             </View>
         </>
@@ -100,7 +110,7 @@ const styles = StyleSheet.create({
     },
 
     cart : {
-        width: 40,
-        height: 40,
+        width: 32,
+        height: 35,
     }
 })
