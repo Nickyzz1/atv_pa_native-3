@@ -195,8 +195,6 @@ const styles = StyleSheet.create({
         maxWidth: 600,
         borderRadius: 10,
         marginBottom: 15,
-        borderBottomWidth: 2,
-        borderBottomColor: Colors.rosaRoxo.background,
         borderColor: Colors.rosaRoxo.background,
         borderWidth: 2,
     },

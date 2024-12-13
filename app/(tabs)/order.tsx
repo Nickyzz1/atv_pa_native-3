@@ -161,7 +161,9 @@ const styles = StyleSheet.create({
         width: '80%',
         maxWidth: 600,
         borderRadius: 10,
-        marginBottom: 15
+        marginBottom: 15,
+        borderColor: Colors.rosaEscuro.background,
+        borderWidth: 1,
     },
     inputTextArea : {
         backgroundColor: Colors.rosaRoxo.background,
@@ -171,7 +173,9 @@ const styles = StyleSheet.create({
         maxWidth: 600,
         borderRadius: 10,
         marginBottom: 15,
-        textAlignVertical: 'top'
+        textAlignVertical: 'top',
+        borderColor: Colors.rosaEscuro.background,
+        borderWidth: 1.5,
     },
     btn : {
         display: 'flex',
