@@ -25,7 +25,7 @@ export default function Profile() {
             }
         };
 
-        loadUser(); // c5hama a função que carrega o usuário
+        loadUser(); // chama a função que carrega o usuário
     }, []); 
 
     // se o user não existir vai exibir carregando
@@ -48,13 +48,22 @@ export default function Profile() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: user.id,  // Remova o 'user' e passe os campos diretamente
-                    name: userName,
-                    email: email,
+                    id: user.id, 
+                    name: user.name,
+                    email: user.email,
                     password: curPass,
                     newPassword: newPassword
                 }),
             });
+
+            console.log("a requisição é ", `http://127.0.0.1:5000/user/${user.id}`)
+            console.log(JSON.stringify({
+                id: user.id, 
+                name: userName,
+                email: email,
+                password: curPass,
+                newPassword: newPassword
+            }))
     
             if (!response.ok) {
                 throw new Error(`Erro na requisição: ${response.statusText}`);
@@ -92,9 +101,8 @@ export default function Profile() {
                     <Text style={styles.subtitle}>Nome</Text>
                     <TextInput
                         value={user?.name ?? ''}
-                        editable={true}
+                        editable={false}
                         style={styles.input}
-                        onChange={(e) => {setUserName(e.nativeEvent.text)}}
                     />
                 </View>
 
@@ -102,9 +110,8 @@ export default function Profile() {
                     <Text style={styles.subtitle}>Email</Text>
                      <TextInput
                         value={user?.email ?? ''}
-                        editable={true}
+                        editable={false}
                         style={styles.input}
-                    
                     />
                 </View>
 
@@ -119,7 +126,7 @@ export default function Profile() {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.subtitle}>Confirmar senha</Text>
+                    <Text style={styles.subtitle}>Confirmar senha atual</Text>
                      <TextInput
                         editable={true}
                         style={styles.input}
