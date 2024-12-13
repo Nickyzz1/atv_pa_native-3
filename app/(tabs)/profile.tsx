@@ -48,7 +48,7 @@ export default function Profile() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: user.id,  // Remova o 'user' e passe os campos diretamente
+                    id: user.id,
                     name: userName,
                     email: email,
                     password: curPass,
