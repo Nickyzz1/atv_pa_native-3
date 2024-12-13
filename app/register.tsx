@@ -117,11 +117,12 @@ const styles = StyleSheet.create({
     fontFamily: 'jua' ,
     fontSize: 33,
     marginBottom: 1,
-    color: Colors.font.background
+    color: Colors.rosaEscuro.background
   },
   input: {
     height: 40,
     padding: 4,
+    textTransform: 'capitalize',
     // borderColor: '#ddd',
     borderWidth: 1,
     width: '60%',
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingLeft: 10,
     borderRadius: 5,
-    outlineColor: Colors.rosaClaro.background,
+    // outlineColor: Colors.marrom.background,
     backgroundColor: Colors.rosaRoxo.background,
 
     borderColor: Colors.marrom.background,

@@ -41,7 +41,7 @@ export const Colors = {
   },
   salamao: {
     text: '#ECEDEE',
-    background: '#FECAC1',
+    background: '#DBA8CAFF',
     tint: tintColorDark,
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
@@ -81,7 +81,7 @@ export const Colors = {
   },
   marrom: {
     text: '#ECEDEE',
-    background: '#705C43',
+    background: '#472222FF',
     tint: tintColorDark,
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
@@ -101,6 +101,14 @@ export const Colors = {
     tint: tintColorDark,
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
+    tabIconSelected: tintColorDark,
+  },
+  rosaEscuro : {
+    text: '#ECEDEE',
+    background: '#AE03B4FF',
+    tint: tintColorDark,
+    icon: '#9BA1A6',
+    tabIconDefault: '#AE03B4FF',
     tabIconSelected: tintColorDark,
   }
   

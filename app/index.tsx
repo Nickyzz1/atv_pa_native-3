@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     fontFamily: 'jua',
     fontSize: 33,
     // marginBottom: 1,
-    color: Colors.font.background
+    color: Colors.rosaEscuro.background
   },
 
   input: {
@@ -168,28 +168,6 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0
   
   },
-
-  // input2: {
-  //   padding: 5,
-  //   height: 40,
-  //   maxWidth: 600,
-  //   // borderColor: '#ddd',
-  //   borderWidth: 1,
-  //   width: '60%',
-  //   // marginBottom: 20,
-  //   paddingLeft: 10,
-  //   borderRadius: 5,
-  //   outlineColor: Colors.rosaClaro.background,
-  //   backgroundColor: Colors.rosaRoxo.background,
-
-  //   borderColor: Colors.marrom.background,
-  //   borderTopWidth: 2,
-  //   borderEndWidth: 0,
-  //   borderRightWidth: 0,
-  //   borderBottomWidth: 0,
-  //   borderLeftWidth: 0
-  
-  // },
 
   textOutput: {
     // marginTop: 20,

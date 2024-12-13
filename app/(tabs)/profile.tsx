@@ -25,7 +25,7 @@ export default function Profile() {
             }
         };
 
-        loadUser(); // c5hama a função que carrega o usuário
+        loadUser(); // chama a função que carrega o usuário
     }, []); 
 
     // se o user não existir vai exibir carregando
@@ -33,9 +33,9 @@ export default function Profile() {
         return (
 
           <>
-          {/* <View style={styles.containerLoading} > */}
+          <View style={styles.containerLoading} >
                 <Text style={styles.loading}>Loading...</Text>
-          {/* </View> */}
+          </View>
           </>
         )
     }
@@ -48,13 +48,22 @@ export default function Profile() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: user.id,
-                    name: userName,
-                    email: email,
+                    id: user.id, 
+                    name: user.name,
+                    email: user.email,
                     password: curPass,
                     newPassword: newPassword
                 }),
             });
+
+            console.log("a requisição é ", `http://127.0.0.1:5000/user/${user.id}`)
+            console.log(JSON.stringify({
+                id: user.id, 
+                name: userName,
+                email: email,
+                password: curPass,
+                newPassword: newPassword
+            }))
     
             if (!response.ok) {
                 throw new Error(`Erro na requisição: ${response.statusText}`);
@@ -92,9 +101,8 @@ export default function Profile() {
                     <Text style={styles.subtitle}>Nome</Text>
                     <TextInput
                         value={user?.name ?? ''}
-                        editable={true}
+                        editable={false}
                         style={styles.input}
-                        onChange={(e) => {setUserName(e.nativeEvent.text)}}
                     />
                 </View>
 
@@ -102,9 +110,8 @@ export default function Profile() {
                     <Text style={styles.subtitle}>Email</Text>
                      <TextInput
                         value={user?.email ?? ''}
-                        editable={true}
+                        editable={false}
                         style={styles.input}
-                    
                     />
                 </View>
 
@@ -119,7 +126,7 @@ export default function Profile() {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.subtitle}>Confirmar senha</Text>
+                    <Text style={styles.subtitle}>Confirmar senha atual</Text>
                      <TextInput
                         editable={true}
                         style={styles.input}
@@ -153,8 +160,7 @@ const styles = StyleSheet.create({
     {
         flex: 1,
         backgroundColor: Colors.rosaClaro.background,
-        width: width,
-        height: height,
+   
     },
     header: {
         flexDirection: 'row',
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontFamily: 'jua',
         fontSize: 25,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
     },
     btnTitle: {
         fontFamily: 'jua',
@@ -183,12 +189,16 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     input : {
-        backgroundColor: Colors.rosaRoxo.background,
+        backgroundColor: Colors.rosaClaro.background,
         padding: 10,
         width: '70%',
         maxWidth: 600,
         borderRadius: 10,
-        marginBottom: 15
+        marginBottom: 15,
+        borderBottomWidth: 2,
+        borderBottomColor: Colors.rosaRoxo.background,
+        borderColor: Colors.rosaRoxo.background,
+        borderWidth: 2,
     },
     btn : {
         backgroundColor: Colors.font.background,
@@ -205,13 +215,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         gap: 3,
         width: '90%',
-        marginTop: 20
+        marginTop: 20,
+        backgroundColor: Colors.white.background,
+        borderRadius: 10,
+        padding: 5,
+        paddingBottom: 15
     },
     title : {
         
         fontFamily: 'jua',
         fontSize: 35,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
         textAlign: 'center',
         position: 'absolute',
         left: '50%', 
@@ -220,7 +234,7 @@ const styles = StyleSheet.create({
     loading: {
         fontFamily: 'jua',
         fontSize: 35,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
         textAlign: 'center',
         alignSelf: 'center',
         marginTop: 20
