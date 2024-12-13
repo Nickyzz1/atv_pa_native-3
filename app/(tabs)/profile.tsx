@@ -211,7 +211,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         gap: 3,
         width: '90%',
-        marginTop: 20
+        marginTop: 20,
+        backgroundColor: Colors.white.background,
+        borderRadius: 10,
+        padding: 5,
+        paddingBottom: 15
     },
     title : {
         
