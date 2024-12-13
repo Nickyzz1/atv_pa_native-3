@@ -189,12 +189,16 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     input : {
-        backgroundColor: Colors.rosaRoxo.background,
+        backgroundColor: Colors.rosaClaro.background,
         padding: 10,
         width: '70%',
         maxWidth: 600,
         borderRadius: 10,
-        marginBottom: 15
+        marginBottom: 15,
+        borderBottomWidth: 2,
+        borderBottomColor: Colors.rosaRoxo.background,
+        borderColor: Colors.rosaRoxo.background,
+        borderWidth: 2,
     },
     btn : {
         backgroundColor: Colors.font.background,
