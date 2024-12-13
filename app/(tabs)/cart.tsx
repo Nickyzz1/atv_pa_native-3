@@ -70,8 +70,8 @@ export default function cart () {
 
     if (loading) {
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>Loading...</Text>
+            <View style={styles.containerLoading}>
+                <Text style={styles.loading}>Loading...</Text>
             </View>
         );
     }
@@ -163,6 +163,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         overflowX: 'hidden'
+    },
+    loading: {
+        fontFamily: 'jua',
+        fontSize: 35,
+        color: Colors.rosaEscuro.background,
+        textAlign: 'center',
+        marginTop: 20
+    },
+    containerLoading : 
+    {
+        flex: 1,
+        backgroundColor: Colors.rosaClaro.background,
+   
     },
 
 })

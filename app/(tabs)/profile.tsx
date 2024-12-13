@@ -33,9 +33,9 @@ export default function Profile() {
         return (
 
           <>
-          {/* <View style={styles.containerLoading} > */}
+          <View style={styles.containerLoading} >
                 <Text style={styles.loading}>Loading...</Text>
-          {/* </View> */}
+          </View>
           </>
         )
     }
@@ -160,8 +160,7 @@ const styles = StyleSheet.create({
     {
         flex: 1,
         backgroundColor: Colors.rosaClaro.background,
-        width: width,
-        height: height,
+   
     },
     header: {
         flexDirection: 'row',
