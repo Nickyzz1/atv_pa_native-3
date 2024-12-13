@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         
         fontFamily: 'jua',
         fontSize: 35,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
         textAlign: 'center',
         position: 'absolute',
         left: '50%', 

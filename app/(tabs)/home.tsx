@@ -32,8 +32,6 @@ export default function home() {
         }
     }
 
-
-
     useEffect(() => {
         fetchProducts();
     }, []);
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'jua',
         fontSize: 30,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
         textAlign: 'center',
         position: 'absolute',
         left: '50%', 
@@ -128,7 +126,7 @@ const styles = StyleSheet.create({
     subTitle: {
         fontFamily: 'jua',
         fontSize: 30,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
         // marginLeft: 30,
         marginTop : 10,
     },

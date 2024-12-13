@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontFamily: 'jua',
         fontSize: 25,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
     },
     btnTitle: {
         fontFamily: 'jua',
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
         
         fontFamily: 'jua',
         fontSize: 35,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
         textAlign: 'center',
         position: 'absolute',
         left: '50%', 
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     loading: {
         fontFamily: 'jua',
         fontSize: 35,
-        color: Colors.font.background,
+        color: Colors.rosaEscuro.background,
         textAlign: 'center',
         alignSelf: 'center',
         marginTop: 20
