@@ -27,7 +27,7 @@ export default function Card({ id, title, price, image, amount, functionButton, 
                     <View style={styles.namePrice}>
                         <Text style={styles.text1} >{title.length > 15 ? title.substring(0, 15) + "..." : title}</Text>
 
-                        <Text style={styles.text2}>R$ {price},00</Text>
+                        <Text style={styles.text2}>R${price},00</Text>
                         {amount ? (
                             <Text style={styles.text3}>Quantidade {amount}</Text>
                         ) : null}

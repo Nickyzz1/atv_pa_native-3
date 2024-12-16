@@ -6,6 +6,7 @@ import Card from '@/components/card'
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 import { router } from "expo-router"
+import { create } from "react-test-renderer"
 
 
 interface Product {
@@ -20,10 +21,15 @@ export default function home() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [modalNewProductVisible, setModalNewProductVisible] = useState<boolean>(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<number>(0);
     const [amount, setAmount] = useState<number>(0);
+
+    const [newName, setNewName] = useState<string>('');
+    const [newPrice, setNewPrice] = useState<number>(0);
+    const [newAmount, setNewAmount] = useState<number>(0);
 
     const fetchProducts = async () => {
         try {
@@ -49,6 +55,10 @@ export default function home() {
         setPrice(product.price);
         setAmount(product.amount);
         setModalVisible(!modalVisible);
+    };
+
+    const toggleModalNewProduct = () => {
+        setModalNewProductVisible(!modalNewProductVisible);
     };
 
     const deleteProduct = async (id: number) => {
@@ -90,9 +100,25 @@ export default function home() {
         if (!isNaN(parsedValue)) {
             setAmount(parsedValue);
         } else {
-            setAmount(0); // Ou outro valor padrão
+            setAmount(0);
         }
     };
+
+    const createProduct = async () => {
+        try {
+            const response = await axios.post(`http://127.0.0.1:5000/product` , {
+                body: {
+                    name: newName,
+                    price: newPrice,
+                    amount: newAmount
+                }
+            });
+            console.log('Resposta da requisição: ', response.data);
+            fetchProducts();
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+        }
+    }
 
     const renderItems = ({item} : {item : Product}) => {
         return (
@@ -122,7 +148,7 @@ export default function home() {
                     <View style={styles.box}>
                         <View style={styles.boxTitle}>
                             <Text style={styles.subTitle}>Produtos</Text>
-                            <TouchableOpacity style={styles.btn}>
+                            <TouchableOpacity style={styles.btn} onPress={toggleModalNewProduct}>
                                 <Text style={styles.text}>Novo produto</Text>
                             </TouchableOpacity>
                         </View>
@@ -163,18 +189,64 @@ export default function home() {
                                 onChangeText={handleAmountChange}
                             />
                             <View style={styles.modalButtons}>
-                                <Button
-                                    title="Salvar"
+                                <TouchableOpacity style={styles.btn} onPress={() => setModalVisible(false)}><Text style={styles.btnTitle} >Cancelar</Text></TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.btn}
                                     onPress={() => {
                                         if (selectedProduct) {
                                             editProduct(selectedProduct.id, { name, price, amount });
                                         }
                                     }}
-                                />
-                                <Button
-                                    title="Cancelar"
-                                    onPress={() => setModalVisible(false)}
-                                />
+                                ><Text style={styles.btnTitle} >Salvar</Text></TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
+
+                {/* Modal de criação de produto */}
+                <Modal
+                    visible={modalNewProductVisible}
+                    animationType="slide"
+                    transparent={true}
+                    onRequestClose={() => setModalNewProductVisible(false)}
+                >
+                    <View style={styles.modalBackground}>
+                        <View style={styles.modalContainer}>
+                            <Text style={styles.modalTitle}>Criar um novo produto</Text>
+                            <Text style={styles.label}>Nome do produto</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Nome"
+                                value={newName}
+                                onChangeText={setNewName}
+                                placeholderTextColor={Colors.rosaClaro.background}
+                            />
+                            <Text style={styles.label}>Preço do produto</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Preço"
+                                keyboardType="numeric"
+                                value={newPrice.toString()}
+                                onChangeText={text => setNewPrice(parseFloat(text) || 0)}
+                                placeholderTextColor={Colors.rosaClaro.background}
+                                maxLength={10}
+                            />
+                            <Text style={styles.label}>Quantidade no estoque</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Quantidade"
+                                keyboardType="numeric"
+                                value={newAmount.toString()}
+                                onChangeText={text => setNewAmount(parseFloat(text) || 0)}
+                                placeholderTextColor={Colors.rosaClaro.background}
+                            />
+                            <View style={styles.modalButtons}>
+                                <TouchableOpacity style={styles.btn} onPress={() => setModalNewProductVisible(false)}><Text style={styles.btnTitle} >Cancelar</Text></TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.btn}
+                                    onPress={createProduct}
+                                ><Text style={styles.btnTitle} >Salvar</Text></TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -188,6 +260,12 @@ export default function home() {
 const {width, height} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
+    btnTitle: {
+        fontFamily: 'jua',
+        fontSize: 20,
+        color: Colors.white.background,
+        textAlign: 'center'
+    },
     flatList: {
         width: '100%',
     },
@@ -213,6 +291,12 @@ const styles = StyleSheet.create({
     subTitle: {
         fontFamily: 'jua',
         fontSize: 30,
+        color: Colors.font.background,
+        marginTop: 10,
+    },
+    label: {
+        fontFamily: 'jua',
+        fontSize: 20,
         color: Colors.font.background,
         marginTop: 10,
     },
@@ -254,27 +338,41 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.5)',
     },
     modalContainer: {
-        backgroundColor: 'white',
+        backgroundColor: Colors.rosaClaro.background,
         padding: 20,
         borderRadius: 10,
         width: width - 40,
         maxWidth: 400,
+        alignItems: 'center'
     },
     modalTitle: {
-        fontSize: 20,
         marginBottom: 15,
         textAlign: 'center',
+        fontFamily: 'jua',
+        fontSize: 30,
+        color: Colors.font.background,
     },
-    input: {
-        height: 40,
-        borderColor: '#ccc',
+    // input: {
+    //     height: 40,
+    //     borderColor: '#ccc',
+    //     borderWidth: 1,
+    //     marginBottom: 10,
+    //     paddingLeft: 8,
+    // },
+    input : {
+        backgroundColor: Colors.rosaRoxo.background,
+        padding: 10,
+        width: '80%',
+        maxWidth: 600,
+        borderRadius: 10,
+        marginBottom: 15,
+        borderColor: Colors.rosaEscuro.background,
         borderWidth: 1,
-        marginBottom: 10,
-        paddingLeft: 8,
     },
     modalButtons: {
         flexDirection: 'row',
         justifyContent: 'space-around',
+        width: '100%',
         marginTop: 15,
     },
 
@@ -287,10 +385,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 0,
         textAlign:'center',
-        width: 150,
+        // width: 130,
         alignSelf: 'center',
         borderColor: Colors.rosaClaro.background,
         borderTopWidth: 1,
+        paddingHorizontal: 12
       },
 
     text: {

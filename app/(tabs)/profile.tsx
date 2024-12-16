@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"; // useState, useEffect são 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
 import { Colors } from "@/constants/Colors";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 export default function Profile() {
     // estado para armazenar o usuário
@@ -82,6 +82,10 @@ export default function Profile() {
             console.error('Erro na requisição:', error);
         }
     };
+
+    const exit = () => {
+        router.push('/');
+    }
     
 
     return (
@@ -94,6 +98,9 @@ export default function Profile() {
                     />
                 </Link>
                 <Text style={styles.title}>Profile</Text>
+                <TouchableOpacity style={styles.boxIcon} onPress={exit} >
+                        <Image source={require('@/assets/images/sair.png')} style={styles.icon}></Image>
+                </TouchableOpacity>
             </View>
 
             <View  style={styles.content}>
@@ -120,6 +127,8 @@ export default function Profile() {
                      <TextInput
                         editable={true}
                         style={styles.input}
+                        placeholderTextColor={Colors.rosaClaro.background}
+                        placeholder="Digite sua nova senha..."
                         onChange={(e) => {setNewPassword(e.nativeEvent.text)}}
                         secureTextEntry={true}
                     />
@@ -130,6 +139,8 @@ export default function Profile() {
                      <TextInput
                         editable={true}
                         style={styles.input}
+                        placeholderTextColor={Colors.rosaClaro.background}
+                        placeholder="Confirme sua senha ATUAL..."
                         onChange={(e) => {setCurPass(e.nativeEvent.text)}}
                         secureTextEntry={true}
                     />
@@ -149,6 +160,20 @@ export default function Profile() {
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+    boxIcon: {
+        backgroundColor: Colors.font.background,
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
+        borderRadius: '50%',
+        aspectRatio: '1/1',
+        padding: 8
+    },
+    icon: {
+        height: 30,
+        width: 30,
+        alignSelf: 'center'
+    },
     container: {
         flex: 1,
         backgroundColor: Colors.rosaClaro.background,
@@ -164,16 +189,17 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
         padding: 6,
         margin: 10,
         width: '100%',
+        paddingHorizontal: 16
     },
     goBack: {
         height: width / 20,
         width: width / 20,
-        marginLeft: 10,
+        // marginLeft: 10,
         minWidth: 50,
         minHeight: 50,
     },
@@ -188,15 +214,25 @@ const styles = StyleSheet.create({
         color: Colors.white.background,
         textAlign: 'center'
     },
+    // input : {
+    //     backgroundColor: Colors.rosaClaro.background,
+    //     padding: 10,
+    //     width: '70%',
+    //     maxWidth: 600,
+    //     borderRadius: 10,
+    //     marginBottom: 15,
+    //     borderColor: Colors.rosaRoxo.background,
+    //     borderWidth: 2,
+    // },
     input : {
-        backgroundColor: Colors.rosaClaro.background,
+        backgroundColor: Colors.rosaRoxo.background,
         padding: 10,
-        width: '70%',
+        width: '80%',
         maxWidth: 600,
         borderRadius: 10,
         marginBottom: 15,
-        borderColor: Colors.rosaRoxo.background,
-        borderWidth: 2,
+        borderColor: Colors.rosaEscuro.background,
+        borderWidth: 1,
     },
     btn : {
         backgroundColor: Colors.font.background,
@@ -213,11 +249,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         gap: 3,
         width: '90%',
-        marginTop: 20,
-        backgroundColor: Colors.white.background,
-        borderRadius: 10,
+        marginTop: 15,
+        // backgroundColor: Colors.white.background,
+        // borderRadius: 5,
         padding: 5,
-        paddingBottom: 15
+        paddingBottom: 10
     },
     title : {
         

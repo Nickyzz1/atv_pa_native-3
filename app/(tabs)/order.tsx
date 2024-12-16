@@ -76,7 +76,8 @@ export default function Order() {
                 <View style={styles.content} >
                     <Text style={styles.subtitle}>Produto</Text>
                     <TextInput
-                  
+                        placeholder="Torta/Bolo"
+                        placeholderTextColor={Colors.rosaClaro.background}
                         style={styles.input}
                         onChange={(text) => (setProduct(text.nativeEvent.text))}
                     />
@@ -85,7 +86,8 @@ export default function Order() {
                 <View style={styles.content}>
                     <Text style={styles.subtitle}>Quantidade</Text>
                      <TextInput
-                    
+                        placeholder="Kg/g"
+                        placeholderTextColor={Colors.rosaClaro.background}
                         style={styles.input}
                         keyboardType="numeric"
                         onChange={(e) => (setAmount(e.nativeEvent.target))}
@@ -95,6 +97,8 @@ export default function Order() {
                 <View style={styles.content}>
                     <Text style={styles.subtitle}>Deatalhes</Text>
                      <TextInput
+                        placeholder="Nos dê mais detalhes sobre seu pedido..."
+                        placeholderTextColor={Colors.rosaClaro.background}
                         editable={true}
                         style={styles.inputTextArea}
                         onChange={(e) => (setDetails(e.nativeEvent.text))}
@@ -199,7 +203,6 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     title : {
-        
         fontFamily: 'jua',
         fontSize: 35,
         color: Colors.rosaEscuro.background,

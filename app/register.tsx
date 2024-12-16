@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     padding: 4,
-    textTransform: 'capitalize',
     // borderColor: '#ddd',
     borderWidth: 1,
     width: '60%',
