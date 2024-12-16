@@ -64,9 +64,11 @@ export default function HomeScreen() {
           <View style={styles.inputBox}>
             <Text style={styles.label}>Senha</Text>
             <TextInput secureTextEntry={true} style={styles.input} value={password} onChangeText={setPassword}/>
-            <Link href={'/register'} style={styles.text2}>
-              <Text>Esqueceu sua senha?</Text>
-            </Link>
+    
+              <Link href={'/recPass'} >
+                <Text>Esqueceu sua senha?</Text>
+              </Link>
+          
           </View>
 
 
