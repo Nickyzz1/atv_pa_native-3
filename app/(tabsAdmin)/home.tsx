@@ -220,7 +220,7 @@ export default function home() {
                                 placeholder="Nome"
                                 value={newName}
                                 onChangeText={setNewName}
-                                placeholderTextColor={Colors.rosaClaro.background}
+                                placeholderTextColor={Colors.rosaPlace.text}
                             />
                             <Text style={styles.label}>Preço do produto</Text>
                             <TextInput
@@ -229,7 +229,7 @@ export default function home() {
                                 keyboardType="numeric"
                                 value={newPrice.toString()}
                                 onChangeText={text => setNewPrice(parseFloat(text) || 0)}
-                                placeholderTextColor={Colors.rosaClaro.background}
+                                placeholderTextColor={Colors.rosaPlace.text}
                                 maxLength={10}
                             />
                             <Text style={styles.label}>Quantidade no estoque</Text>
@@ -239,7 +239,7 @@ export default function home() {
                                 keyboardType="numeric"
                                 value={newAmount.toString()}
                                 onChangeText={text => setNewAmount(parseFloat(text) || 0)}
-                                placeholderTextColor={Colors.rosaClaro.background}
+                                placeholderTextColor={Colors.rosaPlace.text}
                             />
                             <View style={styles.modalButtons}>
                                 <TouchableOpacity style={styles.btn} onPress={() => setModalNewProductVisible(false)}><Text style={styles.btnTitle} >Cancelar</Text></TouchableOpacity>
