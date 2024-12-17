@@ -110,6 +110,10 @@ export const Colors = {
     icon: '#9BA1A6',
     tabIconDefault: '#AE03B4FF',
     tabIconSelected: tintColorDark,
+  },
+
+  rosaPlace: {
+    text: '#C05EA7FF',
   }
   
 };

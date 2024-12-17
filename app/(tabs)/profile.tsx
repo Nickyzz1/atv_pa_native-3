@@ -127,7 +127,7 @@ export default function Profile() {
                      <TextInput
                         editable={true}
                         style={styles.input}
-                        placeholderTextColor={Colors.rosaClaro.background}
+                        placeholderTextColor={Colors.rosaPlace.text}
                         placeholder="Digite sua nova senha..."
                         onChange={(e) => {setNewPassword(e.nativeEvent.text)}}
                         secureTextEntry={true}
@@ -139,7 +139,7 @@ export default function Profile() {
                      <TextInput
                         editable={true}
                         style={styles.input}
-                        placeholderTextColor={Colors.rosaClaro.background}
+                        placeholderTextColor={Colors.rosaPlace.text}
                         placeholder="Confirme sua senha ATUAL..."
                         onChange={(e) => {setCurPass(e.nativeEvent.text)}}
                         secureTextEntry={true}
