@@ -168,12 +168,14 @@ export default function home() {
                     <View style={styles.modalBackground}>
                         <View style={styles.modalContainer}>
                             <Text style={styles.modalTitle}>Editar Produto</Text>
+                            <Text style={styles.label}>Nome do produto</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Nome"
                                 value={name}
                                 onChangeText={setName}
                             />
+                            <Text style={styles.label}>Preço do produto</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Preço"
@@ -181,6 +183,7 @@ export default function home() {
                                 value={price.toString()}
                                 onChangeText={handlePriceChange}
                             />
+                            <Text style={styles.label}>Quantidade do produto</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Quantidade"

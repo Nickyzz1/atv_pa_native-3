@@ -3,19 +3,20 @@ import {StyleSheet, Image, View, Text, Button, TextInput, ImageSourcePropType, T
 import { Colors } from "@/constants/Colors"
 
 type CardProps = {
-    id: number;
+    id?: number;
     title: string;
-    price: number;
-    image: string;
+    price?: number;
+    image?: string;
     amount?: number;
-    functionButton: () => void;
+    functionButton?: () => void;
     functionButtonTwo?: () => void;
-    icon: ImageSourcePropType;
+    icon?: ImageSourcePropType;
     iconTwo?: ImageSourcePropType;
-    displayIcon: boolean
+    displayIcon?: boolean;
+    titleTwo?: string
   };
 
-export default function Card({ id, title, price, image, amount, functionButton, displayIcon, icon, functionButtonTwo, iconTwo } : CardProps) {
+export default function Card({ id, title, price, image, amount, functionButton, displayIcon, icon, functionButtonTwo, iconTwo, titleTwo } : CardProps) {
 
     return (
         <>
@@ -25,9 +26,16 @@ export default function Card({ id, title, price, image, amount, functionButton, 
                     <Image source={require('@/assets/images/logo.png')} width={10} height={10} style={styles.img} />
                 
                     <View style={styles.namePrice}>
+                        {titleTwo ? (
+                            <Text style={styles.text4} >{titleTwo}</Text>
+                        ) : null}
+
                         <Text style={styles.text1} >{title.length > 15 ? title.substring(0, 15) + "..." : title}</Text>
 
-                        <Text style={styles.text2}>R${price},00</Text>
+                        {price ? (
+                            <Text style={styles.text2}>R${price},00</Text>
+                        ) : null}
+
                         {amount ? (
                             <Text style={styles.text3}>Quantidade {amount}</Text>
                         ) : null}
@@ -83,7 +91,7 @@ const styles = StyleSheet.create({
         marginVertical: 4,
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
 
     img: {
@@ -104,6 +112,12 @@ const styles = StyleSheet.create({
     },
 
     text3 : {
+        fontFamily: 'jua',
+        color: Colors.azulEscuro.background,
+        fontSize: 20
+    },
+
+    text4 : {
         fontFamily: 'jua',
         color: Colors.azulEscuro.background,
         fontSize: 20

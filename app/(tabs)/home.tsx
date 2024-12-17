@@ -104,6 +104,7 @@ export default function home() {
             link.click();  // Simular o clique para iniciar o download
     
             console.log('PDF gerado com sucesso');
+            getProductsCart();
         } catch (error) {
             console.log('Erro ao gerar a nota fiscal: ', error);
         } finally {
