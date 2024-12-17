@@ -1,70 +1,44 @@
 
 import { Colors } from '@/constants/Colors';
+import axios from 'axios';
 import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { Buffer } from 'buffer';
 
 export default function RecPass() {
-  const [userEmail, setUserEmail] = useState('');
   const [sended, setSended] = useState(false);
   const [screen, setScreen] = useState(false);
-  const [code, setCode] = useState('');
-  const [correctCode, setCorrectCode] = useState('');
+  const [phone, setPhone] = useState('')
+  const [verificationCode, setVerificationCode] = useState('');
+  const [receivedCode, setReceivedCode] = useState('');
+  const [isCodeSent, setIsCodeSent] = useState(false);
 
-  const sendEmailWithSendGrid = async () => {
-    if (!userEmail) {
-      alert('Por favor, forneça um e-mail válido');
-      return;
-    }
-  
+  const sendSMS = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/send-email', {
+    
+      const response = await fetch('http://localhost:3000/send-sms', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: userEmail,
-        }),
+        body : phone,
       });
-  
-      const data = await response.json();
       if (response.ok) {
-        setSended(true);
-        alert(data.message);
-      } else {
-        alert(data.error);
+        setVerificationCode(await response.json()); // Armazena o código recebido para comparação
+        setIsCodeSent(true);
+        console.log('Código de verificação enviado!');
       }
     } catch (error) {
-      alert('Erro ao enviar e-mail');
-    }
-  };
-  
-
-  const verifyCode = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/verify-code', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          code,
-          correct_code: correctCode,
-        }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        alert(data.message);
-      } else {
-        alert(data.error);
-      }
-    } catch (error) {
-      alert('Erro na verificação do código');
+      console.error('Erro ao enviar SMS:', error);
     }
   };
 
+  const verifyCode = () => {
+    if (receivedCode === verificationCode) {
+      console.log('Código verificado com sucesso!');
+    } else {
+      console.log('Código incorreto!');
+    }
+  };
+  
   const changePass = async () => {
     
   }
@@ -85,11 +59,11 @@ export default function RecPass() {
                   <>
                     <View style={styles.inputBox}>
                       <Text style={styles.label}>Telefone</Text>
-                      <TextInput style={styles.input} placeholder='Digite seu telefone...' placeholderTextColor={Colors.rosaPlace.text}/>
+                      <TextInput style={styles.input} placeholder='Digite seu telefone...' value={phone} placeholderTextColor={Colors.rosaPlace.text} onChangeText={setPhone} />
                     </View>
     
                     <View style={styles.inputBox}>
-                    <TouchableOpacity style={styles.btn} onPress={() => {setSended(!sended); }}>
+                    <TouchableOpacity style={styles.btn} onPress={() => {setSended(!sended); sendSMS(); }}>
                       <Text style={styles.text}>Enviar Token</Text>
                     </TouchableOpacity>
     
@@ -126,7 +100,7 @@ export default function RecPass() {
                   </View>
 
                   <View style={styles.inputBox}>
-                  <TouchableOpacity style={styles.btn} onPress={changePass}>
+                  <TouchableOpacity style={styles.btn} >
                     <Text style={styles.text}>Entrar</Text>
                   </TouchableOpacity>
 
