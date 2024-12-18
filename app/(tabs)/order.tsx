@@ -9,7 +9,7 @@ export default function Order() {
     const [user, setUser] = useState<{ name: string, email: string, id: number, password : string} | null>(null);
     const [userName, setUserName] = useState('')
     const [product, setProduct] = useState('')
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount] = useState('')
     const [details, setDetails] = useState('')
 
     // useEffect para pegar os dados do AsyncStorage assim que o componente for montado
@@ -87,10 +87,11 @@ export default function Order() {
                     <Text style={styles.subtitle}>Quantidade</Text>
                      <TextInput
                         placeholder="Kg/g"
+                        value={amount}
                         placeholderTextColor={Colors.rosaPlace.text}
                         style={styles.input}
-                        keyboardType="numeric"
-                        onChange={(e) => (setAmount(e.nativeEvent.target))}
+                        // keyboardType="numeric"
+                        onChange={(text) => (setAmount(text.nativeEvent.text))}
                     />
                 </View>
 
