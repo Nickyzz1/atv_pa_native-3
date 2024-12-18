@@ -5,6 +5,7 @@ import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Buffer } from 'buffer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function RecPass() {
   const [sended, setSended] = useState(false);
@@ -13,23 +14,75 @@ export default function RecPass() {
   const [verificationCode, setVerificationCode] = useState('');
   const [receivedCode, setReceivedCode] = useState('');
   const [isCodeSent, setIsCodeSent] = useState(false);
+  const [code, setCode] = useState('')
+  const [newPass, setNewPass] = useState('')
 
-  const sendSMS = async () => {
-    try {
+  // const sendSMS = async () => {
+  //   try {
     
-      const response = await fetch('http://localhost:3000/send-sms', {
-        method: 'POST',
-        body : phone,
-      });
-      if (response.ok) {
-        setVerificationCode(await response.json()); // Armazena o código recebido para comparação
-        setIsCodeSent(true);
-        console.log('Código de verificação enviado!');
-      }
+  //     const response = await fetch('http://localhost:3000/send-sms', {
+  //       method: 'POST',
+  //       body : phone,
+  //     });
+  //     if (response.ok) {
+  //       setVerificationCode(await response.json()); // Armazena o código recebido para comparação
+  //       setIsCodeSent(true);
+  //       console.log('Código de verificação enviado!');
+  //     }
+  //   } catch (error) {
+  //     console.error('Erro ao enviar SMS:', error);
+  //   }
+  // };
+
+  const updateInfo = async () => {
+    const userJson = await AsyncStorage.getItem('user');
+
+    if (!userJson) {
+      console.log('Nenhum usuário encontrado no AsyncStorage');
+      return;
+  }
+
+    const user = JSON.parse(userJson);
+
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ',user)
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/user/recPass`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                newPassword: newPass,
+                id: user.id
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.statusText}`);
+        }
+        
+        const jsonResponse = await response.json();
+        console.log('Resposta da requisição: ', jsonResponse);
+
+        if (response.status === 400) {
+            alert("Senha incorreta");
+        } else {
+            alert("Atualizado com sucesso");
+            router.push('/');
+        }
+
     } catch (error) {
-      console.error('Erro ao enviar SMS:', error);
+        console.error('Erro na requisição:', error);
     }
-  };
+};
+
+
+  const randomInt = (min : number, max : number) =>
+    Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const sendCode = () => {
+    setCode(randomInt(1000,9999).toString())
+  }
 
   const verifyCode = () => {
     if (receivedCode === verificationCode) {
@@ -39,9 +92,6 @@ export default function RecPass() {
     }
   };
   
-  const changePass = async () => {
-    
-  }
 
   return (
     <>
@@ -63,7 +113,7 @@ export default function RecPass() {
                     </View>
     
                     <View style={styles.inputBox}>
-                    <TouchableOpacity style={styles.btn} onPress={() => {setSended(!sended); sendSMS(); }}>
+                    <TouchableOpacity style={styles.btn} onPress={() => {setSended(!sended); sendCode() }}>
                       <Text style={styles.text}>Enviar Token</Text>
                     </TouchableOpacity>
     
@@ -77,7 +127,8 @@ export default function RecPass() {
                     <View style={styles.inputBox}>
                       <Text style={styles.label}>Token</Text>
                       <Text style={styles.text3}>Token enviado no seu SMS!</Text>
-                      <TextInput secureTextEntry={true} style={styles.input} placeholder='Digite o token...' placeholderTextColor={Colors.rosaPlace.text}/>
+                      <TextInput value={code} style={styles.input} placeholder='Digite o token...' placeholderTextColor={Colors.rosaPlace.text}/>
+                      <Text style={styles.text4}>Token preenchido automaticamente</Text>
                     </View>
     
                     <View style={styles.inputBox}>
@@ -96,11 +147,11 @@ export default function RecPass() {
                 <>
                   <View style={styles.inputBox}>
                     <Text style={styles.label}>Nova senha</Text>
-                    <TextInput secureTextEntry={true} style={styles.input} placeholder='Digite sua nova senha...' placeholderTextColor={Colors.rosaPlace.text}/>
+                    <TextInput secureTextEntry={true} value={newPass} style={styles.input} placeholder='Digite sua nova senha...' placeholderTextColor={Colors.rosaPlace.text} onChangeText={setNewPass} />
                   </View>
 
                   <View style={styles.inputBox}>
-                  <TouchableOpacity style={styles.btn} >
+                  <TouchableOpacity onPress={updateInfo} style={styles.btn} >
                     <Text style={styles.text}>Entrar</Text>
                   </TouchableOpacity>
 
@@ -121,35 +172,7 @@ export default function RecPass() {
       </View>
     </>
 
-    // <View style={styles.container}>
-    //   {!sended ? (
-    //     <>
-    //       <TextInput
-    //         style={styles.input}
-    //         placeholder="Seu e-mail"
-    //         value={userEmail}
-    //         onChangeText={setUserEmail}
-    //       />
 
-    //       <TouchableOpacity style={styles.button} onPress={sendEmailWithSendGrid}>
-    //         <Text style={styles.buttonText}>Enviar E-mail</Text>
-    //       </TouchableOpacity>
-    //     </>
-    //   ) : (
-    //     <>
-    //       <TextInput
-    //         style={styles.input}
-    //         placeholder="Código"
-    //         value={code}
-    //         onChangeText={setCode}
-    //       />
-
-    //       <TouchableOpacity style={styles.button} onPress={verifyCode}>
-    //         <Text style={styles.buttonText}>Validar Código</Text>
-    //       </TouchableOpacity>
-    //     </>
-    //   )}
-    // </View>
   );
 }
 
@@ -285,6 +308,12 @@ const styles = StyleSheet.create({
   text3: {
     color: Colors.marrom.background,
     fontSize: 15,
+    paddingLeft: 2
+  },
+
+  text4: {
+    color: Colors.rosaEscuro.background,
+    fontSize: 13.5,
     paddingLeft: 2
   },
 

@@ -31,6 +31,8 @@ export default function HomeScreen() {
         const user = data.user;
         if (response.ok) {
           await AsyncStorage.setItem('user', JSON.stringify(user));
+          const userJson = await AsyncStorage.getItem('user');
+          console.log(userJson);
           if (user.isAdmin == true) {
             router.push("/(tabsAdmin)/home");
           }
